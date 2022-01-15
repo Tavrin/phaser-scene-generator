@@ -1,18 +1,13 @@
 import Phaser from 'phaser';
 import TitleScreen from './scenes/TitleScreen';
 import GameScreen from "./scenes/GameScreen";
+import RenderScreen from "./scenes/RenderScreen";
 
 const config = {
     type: Phaser.AUTO,
     width: window.innerWidth,
     height: window.innerHeight,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: {y: 200}
-        }
-    },
-    scene: [TitleScreen, GameScreen]
+    scene: [TitleScreen, GameScreen, RenderScreen]
 };
 
 

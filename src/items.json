@@ -1,14 +1,338 @@
 {
-	"background": {
-
+	"front": {
+		"items": [
+			{
+				"file": "public/assets/img/items/front/front1.png",
+				"name": "front1"
+			},
+			{
+				"file": "public/assets/img/items/front/front2.png",
+				"name": "front2"
+			},
+			{
+				"file": "public/assets/img/items/front/front3.png",
+				"name": "front3"
+			},
+			{
+				"file": "public/assets/img/items/front/front4.png",
+				"name": "front4"
+			},
+			{
+				"file": "public/assets/img/items/front/front5.png",
+				"name": "front5"
+			},
+			{
+				"file": "public/assets/img/items/front/front6.png",
+				"name": "front6"
+			},
+			{
+				"file": "public/assets/img/items/front/front7.png",
+				"name": "front7"
+			},
+			{
+				"file": "public/assets/img/items/front/front8.png",
+				"name": "front8"
+			},
+			{
+				"file": "public/assets/img/items/front/front9.png",
+				"name": "front9"
+			},
+			{
+				"file": "public/assets/img/items/front/front10.png",
+				"name": "front10"
+			},
+			{
+				"file": "public/assets/img/items/front/front11.png",
+				"name": "front11"
+			},
+			{
+				"file": "public/assets/img/items/front/front12.png",
+				"name": "front12"
+			},
+			{
+				"file": "public/assets/img/items/front/front13.png",
+				"name": "front13"
+			},
+			{
+				"file": "public/assets/img/items/front/front14.png",
+				"name": "front14"
+			},
+			{
+				"file": "public/assets/img/items/front/front15.png",
+				"name": "front15"
+			},
+			{
+				"file": "public/assets/img/items/front/front16.png",
+				"name": "front16"
+			},
+			{
+				"file": "public/assets/img/items/front/front17.png",
+				"name": "front17"
+			},
+			{
+				"file": "public/assets/img/items/front/front18.png",
+				"name": "front18"
+			},
+			{
+				"file": "public/assets/img/items/front/front19.png",
+				"name": "front19"
+			},
+			{
+				"file": "public/assets/img/items/front/front20.png",
+				"name": "front20"
+			}
+		]
 	},
 	"back": {
-
+		"items": [
+			{
+				"file": "public/assets/img/items/back/back1.png",
+				"name": "back1"
+			},
+			{
+				"file": "public/assets/img/items/back/back2.png",
+				"name": "back2"
+			},
+			{
+				"file": "public/assets/img/items/back/back3.png",
+				"name": "back3"
+			},
+			{
+				"file": "public/assets/img/items/back/back4.png",
+				"name": "back4"
+			},
+			{
+				"file": "public/assets/img/items/back/back5.png",
+				"name": "back5"
+			},
+			{
+				"file": "public/assets/img/items/back/back6.png",
+				"name": "back6"
+			},
+			{
+				"file": "public/assets/img/items/back/back7.png",
+				"name": "back7"
+			},
+			{
+				"file": "public/assets/img/items/back/back8.png",
+				"name": "back8"
+			},
+			{
+				"file": "public/assets/img/items/back/back9.png",
+				"name": "back9"
+			},
+			{
+				"file": "public/assets/img/items/back/back10.png",
+				"name": "back10"
+			},
+			{
+				"file": "public/assets/img/items/back/back11.png",
+				"name": "back11"
+			},
+			{
+				"file": "public/assets/img/items/back/back12.png",
+				"name": "back12"
+			},
+			{
+				"file": "public/assets/img/items/back/back13.png",
+				"name": "back13"
+			},
+			{
+				"file": "public/assets/img/items/back/back14.png",
+				"name": "back14"
+			},
+			{
+				"file": "public/assets/img/items/back/back15.png",
+				"name": "back15"
+			},
+			{
+				"file": "public/assets/img/items/back/back16.png",
+				"name": "back16"
+			},
+			{
+				"file": "public/assets/img/items/back/back17.png",
+				"name": "back17"
+			},
+			{
+				"file": "public/assets/img/items/back/back18.png",
+				"name": "back18"
+			},
+			{
+				"file": "public/assets/img/items/back/back19.png",
+				"name": "back19"
+			},
+			{
+				"file": "public/assets/img/items/back/back20.png",
+				"name": "back20"
+			}
+		]
 	},
-	"front": {
-
+	"background": {
+		"items": [
+			{
+				"file": "public/assets/img/items/background/background1.png",
+				"name": "background1"
+			},
+			{
+				"file": "public/assets/img/items/background/background2.png",
+				"name": "background2"
+			},
+			{
+				"file": "public/assets/img/items/background/background3.png",
+				"name": "background3"
+			},
+			{
+				"file": "public/assets/img/items/background/background4.png",
+				"name": "background4"
+			},
+			{
+				"file": "public/assets/img/items/background/background5.png",
+				"name": "background5"
+			},
+			{
+				"file": "public/assets/img/items/background/background6.png",
+				"name": "background6"
+			},
+			{
+				"file": "public/assets/img/items/background/background7.png",
+				"name": "background7"
+			},
+			{
+				"file": "public/assets/img/items/background/background8.png",
+				"name": "background8"
+			},
+			{
+				"file": "public/assets/img/items/background/background9.png",
+				"name": "background9"
+			},
+			{
+				"file": "public/assets/img/items/background/background10.png",
+				"name": "background10"
+			},
+			{
+				"file": "public/assets/img/items/background/background11.png",
+				"name": "background11"
+			},
+			{
+				"file": "public/assets/img/items/background/background12.png",
+				"name": "background12"
+			},
+			{
+				"file": "public/assets/img/items/background/background13.png",
+				"name": "background13"
+			},
+			{
+				"file": "public/assets/img/items/background/background14.png",
+				"name": "background14"
+			},
+			{
+				"file": "public/assets/img/items/background/background15.png",
+				"name": "background15"
+			},
+			{
+				"file": "public/assets/img/items/background/background16.png",
+				"name": "background16"
+			},
+			{
+				"file": "public/assets/img/items/background/background17.png",
+				"name": "background17"
+			},
+			{
+				"file": "public/assets/img/items/background/background18.png",
+				"name": "background18"
+			},
+			{
+				"file": "public/assets/img/items/background/background19.png",
+				"name": "background19"
+			},
+			{
+				"file": "public/assets/img/items/background/background20.png",
+				"name": "background20"
+			}
+		]
 	},
-	"sounds": {
-
+	"sound": {
+		"items": [
+			{
+				"file": "public/assets/sounds/items/sound1.mp3",
+				"name": "sound1"
+			},
+			{
+				"file": "public/assets/sounds/items/sound2.mp3",
+				"name": "sound2"
+			},
+			{
+				"file": "public/assets/sounds/items/sound3.mp3",
+				"name": "sound3"
+			},
+			{
+				"file": "public/assets/sounds/items/sound4.mp3",
+				"name": "sound4"
+			},
+			{
+				"file": "public/assets/sounds/items/sound5.mp3",
+				"name": "sound5"
+			},
+			{
+				"file": "public/assets/sounds/items/sound6.mp3",
+				"name": "sound6"
+			},
+			{
+				"file": "public/assets/sounds/items/sound7.mp3",
+				"name": "sound7"
+			},
+			{
+				"file": "public/assets/sounds/items/sound8.mp3",
+				"name": "sound8"
+			},
+			{
+				"file": "public/assets/sounds/items/sound9.mp3",
+				"name": "sound9"
+			},
+			{
+				"file": "public/assets/sounds/items/sound10.mp3",
+				"name": "sound10"
+			},
+			{
+				"file": "public/assets/sounds/items/sound11.mp3",
+				"name": "sound11"
+			},
+			{
+				"file": "public/assets/sounds/items/sound12.mp3",
+				"name": "sound12"
+			},
+			{
+				"file": "public/assets/sounds/items/sound13.mp3",
+				"name": "sound13"
+			},
+			{
+				"file": "public/assets/sounds/items/sound14.mp3",
+				"name": "sound14"
+			},
+			{
+				"file": "public/assets/sounds/items/sound15.mp3",
+				"name": "sound15"
+			},
+			{
+				"file": "public/assets/sounds/items/sound16.mp3",
+				"name": "sound16"
+			},
+			{
+				"file": "public/assets/sounds/items/sound17.mp3",
+				"name": "sound17"
+			},
+			{
+				"file": "public/assets/sounds/items/sound18.mp3",
+				"name": "sound18"
+			},
+			{
+				"file": "public/assets/sounds/items/sound19.mp3",
+				"name": "sound19"
+			},
+			{
+				"file": "public/assets/sounds/items/sound20.mp3",
+				"name": "sound20"
+			}
+		]
 	}
 }

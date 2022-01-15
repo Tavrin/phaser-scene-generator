@@ -29,6 +29,5 @@ export default class ItemSelector extends Phaser.GameObjects.Sprite {
         this.itemSprite = sprite;
         this.itemId = itemName;
         this.setTexture(this.itemId);
-        console.log(this.itemId);
     }
 }

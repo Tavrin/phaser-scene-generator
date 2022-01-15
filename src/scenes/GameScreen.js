@@ -106,7 +106,7 @@ const BACKGROUND_ITEMS = [
     'back20',
 ];
 
-export default class GameScreen extends Phaser.Scene
+    export default class GameScreen extends Phaser.Scene
 {
     constructor()
     {
@@ -186,14 +186,16 @@ export default class GameScreen extends Phaser.Scene
                 }
             }
 
-            console.log(this.selectedItems);
+            this.cameras.main.fadeOut(200, 0, 0, 0);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+                this.scene.start('RenderScreen', {selectedItems: this.selectedItems});
+            })
         })
     }
 
     setPickingBoard(screenCenterX, screenCenterY, filter, backImage)
     {
         for (let i = 0; i < this.types.length; i++) {
-            console.log(this.itemsNamesList);
             for (let y = 0; y < 5; y++) {
                 let pickingBoard = new ItemPickingBoard({
                     scene: this,
