@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+}
+
+@font-face {
+    font-family: font1;
+    src: url('../assets/font/Anton-Regular.ttf');
+    font-weight:400;
+    font-weight:normal;
+}
