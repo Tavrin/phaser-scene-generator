@@ -1,337 +1,838 @@
 {
-	"front": {
+	"background": {
 		"items": [
 			{
-				"file": "public/assets/img/items/front/front1.png",
-				"name": "front1"
+				"type": "image",
+				"selector": {
+					"name": "background1Selector",
+					"file": "public/assets/items/background/selectors/background1.png"
+				},
+				"item": {
+					"name": "background1",
+					"file": "public/assets/items/background/background1.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front2.png",
-				"name": "front2"
+				"type": "image",
+				"selector": {
+					"name": "background2Selector",
+					"file": "public/assets/items/background/selectors/background2.png"
+				},
+				"item": {
+					"name": "background2",
+					"file": "public/assets/items/background/background2.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front3.png",
-				"name": "front3"
+				"type": "image",
+				"selector": {
+					"name": "background3Selector",
+					"file": "public/assets/items/background/selectors/background3.png"
+				},
+				"item": {
+					"name": "background3",
+					"file": "public/assets/items/background/background3.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front4.png",
-				"name": "front4"
+				"type": "image",
+				"selector": {
+					"name": "background4Selector",
+					"file": "public/assets/items/background/selectors/background4.png"
+				},
+				"item": {
+					"name": "background4",
+					"file": "public/assets/items/background/background4.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front5.png",
-				"name": "front5"
+				"type": "image",
+				"selector": {
+					"name": "background5Selector",
+					"file": "public/assets/items/background/selectors/background5.png"
+				},
+				"item": {
+					"name": "background5",
+					"file": "public/assets/items/background/background5.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front6.png",
-				"name": "front6"
+				"type": "image",
+				"selector": {
+					"name": "background6Selector",
+					"file": "public/assets/items/background/selectors/background6.png"
+				},
+				"item": {
+					"name": "background6",
+					"file": "public/assets/items/background/background6.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front7.png",
-				"name": "front7"
+				"type": "image",
+				"selector": {
+					"name": "background7Selector",
+					"file": "public/assets/items/background/selectors/background7.png"
+				},
+				"item": {
+					"name": "background7",
+					"file": "public/assets/items/background/background7.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front8.png",
-				"name": "front8"
+				"type": "image",
+				"selector": {
+					"name": "background8Selector",
+					"file": "public/assets/items/background/selectors/background8.png"
+				},
+				"item": {
+					"name": "background8",
+					"file": "public/assets/items/background/background8.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front9.png",
-				"name": "front9"
+				"type": "image",
+				"selector": {
+					"name": "background9Selector",
+					"file": "public/assets/items/background/selectors/background9.png"
+				},
+				"item": {
+					"name": "background9",
+					"file": "public/assets/items/background/background9.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front10.png",
-				"name": "front10"
+				"type": "image",
+				"selector": {
+					"name": "background10Selector",
+					"file": "public/assets/items/background/selectors/background10.png"
+				},
+				"item": {
+					"name": "background10",
+					"file": "public/assets/items/background/background10.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front11.png",
-				"name": "front11"
+				"type": "color",
+				"selector": {
+					"name": "background11Selector",
+					"file": "public/assets/items/background/selectors/background11.png"
+				},
+				"item": {
+					"name": "background11",
+					"file": "public/assets/items/background/background11.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front12.png",
-				"name": "front12"
+				"type": "color",
+				"selector": {
+					"name": "background12Selector",
+					"file": "public/assets/items/background/selectors/background12.png"
+				},
+				"item": {
+					"name": "background12",
+					"file": "public/assets/items/background/background12.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front13.png",
-				"name": "front13"
+				"type": "color",
+				"selector": {
+					"name": "background13Selector",
+					"file": "public/assets/items/background/selectors/background13.png"
+				},
+				"item": {
+					"name": "background13",
+					"file": "public/assets/items/background/background13.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front14.png",
-				"name": "front14"
+				"type": "color",
+				"selector": {
+					"name": "background14Selector",
+					"file": "public/assets/items/background/selectors/background14.png"
+				},
+				"item": {
+					"name": "background14",
+					"file": "public/assets/items/background/background14.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front15.png",
-				"name": "front15"
+				"type": "color",
+				"selector": {
+					"name": "background15Selector",
+					"file": "public/assets/items/background/selectors/background15.png"
+				},
+				"item": {
+					"name": "background15",
+					"file": "public/assets/items/background/background15.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front16.png",
-				"name": "front16"
+				"type": "color",
+				"selector": {
+					"name": "background16Selector",
+					"file": "public/assets/items/background/selectors/background16.png"
+				},
+				"item": {
+					"name": "background16",
+					"file": "public/assets/items/background/background16.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front17.png",
-				"name": "front17"
+				"type": "color",
+				"selector": {
+					"name": "background17Selector",
+					"file": "public/assets/items/background/selectors/background17.png"
+				},
+				"item": {
+					"name": "background17",
+					"file": "public/assets/items/background/background17.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front18.png",
-				"name": "front18"
+				"type": "color",
+				"selector": {
+					"name": "background18Selector",
+					"file": "public/assets/items/background/selectors/background18.png"
+				},
+				"item": {
+					"name": "background18",
+					"file": "public/assets/items/background/background18.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front19.png",
-				"name": "front19"
+				"type": "color",
+				"selector": {
+					"name": "background19Selector",
+					"file": "public/assets/items/background/selectors/background19.png"
+				},
+				"item": {
+					"name": "background19",
+					"file": "public/assets/items/background/background19.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/front/front20.png",
-				"name": "front20"
+				"type": "color",
+				"selector": {
+					"name": "background20Selector",
+					"file": "public/assets/items/background/selectors/background20.png"
+				},
+				"item":
+				{
+					"name": "background20",
+					"file": "public/assets/items/background/background20.png"
+				}
 			}
 		]
 	},
 	"back": {
 		"items": [
 			{
-				"file": "public/assets/img/items/back/back1.png",
-				"name": "back1"
+				"selector": {
+					"name": "back1Selector",
+					"file": "public/assets/items/back/selectors/back1.png"
+				},
+				"item": {
+					"name": "back1",
+					"file": "public/assets/items/back/back1.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back2.png",
-				"name": "back2"
+				"selector": {
+					"name": "back2Selector",
+					"file": "public/assets/items/back/selectors/back2.png"
+				},
+				"item": {
+					"name": "back2",
+					"file": "public/assets/items/back/back2.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back3.png",
-				"name": "back3"
+				"selector": {
+					"name": "back3Selector",
+					"file": "public/assets/items/back/selectors/back3.png"
+				},
+				"item": {
+					"name": "back3",
+					"file": "public/assets/items/back/back3.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back4.png",
-				"name": "back4"
+				"selector": {
+					"name": "back4Selector",
+					"file": "public/assets/items/back/selectors/back4.png"
+				},
+				"item": {
+					"name": "back4",
+					"file": "public/assets/items/back/back4.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back5.png",
-				"name": "back5"
+				"selector": {
+					"name": "back5Selector",
+					"file": "public/assets/items/back/selectors/back5.png"
+				},
+				"item": {
+					"name": "back5",
+					"file": "public/assets/items/back/back5.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back6.png",
-				"name": "back6"
+				"selector": {
+					"name": "back6Selector",
+					"file": "public/assets/items/back/selectors/back6.png"
+				},
+				"item": {
+					"name": "back6",
+					"file": "public/assets/items/back/back6.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back7.png",
-				"name": "back7"
+				"selector": {
+					"name": "back7Selector",
+					"file": "public/assets/items/back/selectors/back7.png"
+				},
+				"item": {
+					"name": "back7",
+					"file": "public/assets/items/back/back7.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back8.png",
-				"name": "back8"
+				"selector": {
+					"name": "back8Selector",
+					"file": "public/assets/items/back/selectors/back8.png"
+				},
+				"item": {
+					"name": "back8",
+					"file": "public/assets/items/back/back8.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back9.png",
-				"name": "back9"
+				"selector": {
+					"name": "back9Selector",
+					"file": "public/assets/items/back/selectors/back9.png"
+				},
+				"item": {
+					"name": "back9",
+					"file": "public/assets/items/back/back9.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back10.png",
-				"name": "back10"
+				"selector": {
+					"name": "back10Selector",
+					"file": "public/assets/items/back/selectors/back10.png"
+				},
+				"item": {
+					"name": "back10",
+					"file": "public/assets/items/back/back10.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back11.png",
-				"name": "back11"
+				"selector": {
+					"name": "back11Selector",
+					"file": "public/assets/items/back/selectors/back11.png"
+				},
+				"item": {
+					"name": "back11",
+					"file": "public/assets/items/back/back11.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back12.png",
-				"name": "back12"
+				"selector": {
+					"name": "back12Selector",
+					"file": "public/assets/items/back/selectors/back12.png"
+				},
+				"item": {
+					"name": "back12",
+					"file": "public/assets/items/back/back12.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back13.png",
-				"name": "back13"
+				"selector": {
+					"name": "back13Selector",
+					"file": "public/assets/items/back/selectors/back13.png"
+				},
+				"item": {
+					"name": "back13",
+					"file": "public/assets/items/back/back13.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back14.png",
-				"name": "back14"
+				"selector": {
+					"name": "back14Selector",
+					"file": "public/assets/items/back/selectors/back14.png"
+				},
+				"item": {
+					"name": "back14",
+					"file": "public/assets/items/back/back14.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back15.png",
-				"name": "back15"
+				"selector": {
+					"name": "back15Selector",
+					"file": "public/assets/items/back/selectors/back15.png"
+				},
+				"item": {
+					"name": "back15",
+					"file": "public/assets/items/back/back15.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back16.png",
-				"name": "back16"
+				"selector": {
+					"name": "back16Selector",
+					"file": "public/assets/items/back/selectors/back16.png"
+				},
+				"item": {
+					"name": "back16",
+					"file": "public/assets/items/back/back16.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back17.png",
-				"name": "back17"
+				"selector": {
+					"name": "back17Selector",
+					"file": "public/assets/items/back/selectors/back17.png"
+				},
+				"item": {
+					"name": "back17",
+					"file": "public/assets/items/back/back17.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back18.png",
-				"name": "back18"
+				"selector": {
+					"name": "back18Selector",
+					"file": "public/assets/items/back/selectors/back18.png"
+				},
+				"item": {
+					"name": "back18",
+					"file": "public/assets/items/back/back18.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back19.png",
-				"name": "back19"
+				"selector": {
+					"name": "back19Selector",
+					"file": "public/assets/items/back/selectors/back19.png"
+				},
+				"item": {
+					"name": "back19",
+					"file": "public/assets/items/back/back19.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/back/back20.png",
-				"name": "back20"
+				"selector": {
+					"name": "back20Selector",
+					"file": "public/assets/items/back/selectors/back20.png"
+				},
+				"item": {
+					"name": "back20",
+					"file": "public/assets/items/back/back20.png"
+				}
 			}
 		]
 	},
-	"background": {
+	"front": {
 		"items": [
 			{
-				"file": "public/assets/img/items/background/background1.png",
-				"name": "background1"
+				"selector": {
+					"name": "front1Selector",
+					"file": "public/assets/items/front/selectors/front1.png"
+				},
+				"item": {
+					"name": "front1",
+					"file": "public/assets/items/front/front1.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background2.png",
-				"name": "background2"
+				"selector": {
+					"name": "front2Selector",
+					"file": "public/assets/items/front/selectors/front2.png"
+				},
+				"item": {
+					"name": "front2",
+					"file": "public/assets/items/front/front2.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background3.png",
-				"name": "background3"
+				"selector": {
+					"name": "front3Selector",
+					"file": "public/assets/items/front/selectors/front3.png"
+				},
+				"item": {
+					"name": "front3",
+					"file": "public/assets/items/front/front3.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background4.png",
-				"name": "background4"
+				"selector": {
+					"name": "front4Selector",
+					"file": "public/assets/items/front/selectors/front4.png"
+				},
+				"item": {
+					"name": "front4",
+					"file": "public/assets/items/front/front4.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background5.png",
-				"name": "background5"
+				"selector": {
+					"name": "front5Selector",
+					"file": "public/assets/items/front/selectors/front5.png"
+				},
+				"item": {
+					"name": "front5",
+					"file": "public/assets/items/front/front5.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background6.png",
-				"name": "background6"
+				"selector": {
+					"name": "front6Selector",
+					"file": "public/assets/items/front/selectors/front6.png"
+				},
+				"item": {
+					"name": "front6",
+					"file": "public/assets/items/front/front6.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background7.png",
-				"name": "background7"
+				"selector": {
+					"name": "front7Selector",
+					"file": "public/assets/items/front/selectors/front7.png"
+				},
+				"item": {
+					"name": "front7",
+					"file": "public/assets/items/front/front7.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background8.png",
-				"name": "background8"
+				"selector": {
+					"name": "front8Selector",
+					"file": "public/assets/items/front/selectors/front8.png"
+				},
+				"item": {
+					"name": "front8",
+					"file": "public/assets/items/front/front8.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background9.png",
-				"name": "background9"
+				"selector": {
+					"name": "front9Selector",
+					"file": "public/assets/items/front/selectors/front9.png"
+				},
+				"item": {
+					"name": "front9",
+					"file": "public/assets/items/front/front9.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background10.png",
-				"name": "background10"
+				"selector": {
+					"name": "front10Selector",
+					"file": "public/assets/items/front/selectors/front10.png"
+				},
+				"item": {
+					"name": "front10",
+					"file": "public/assets/items/front/front10.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background11.png",
-				"name": "background11"
+				"selector": {
+					"name": "front11Selector",
+					"file": "public/assets/items/front/selectors/front11.png"
+				},
+				"item": {
+					"name": "front11",
+					"file": "public/assets/items/front/front11.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background12.png",
-				"name": "background12"
+				"selector": {
+					"name": "front12Selector",
+					"file": "public/assets/items/front/selectors/front12.png"
+				},
+				"item": {
+					"name": "front12",
+					"file": "public/assets/items/front/front12.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background13.png",
-				"name": "background13"
+				"selector": {
+					"name": "front13Selector",
+					"file": "public/assets/items/front/selectors/front13.png"
+				},
+				"item": {
+					"name": "front13",
+					"file": "public/assets/items/front/front13.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background14.png",
-				"name": "background14"
+				"selector": {
+					"name": "front14Selector",
+					"file": "public/assets/items/front/selectors/front14.png"
+				},
+				"item": {
+					"name": "front14",
+					"file": "public/assets/items/front/front14.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background15.png",
-				"name": "background15"
+				"selector": {
+					"name": "front15Selector",
+					"file": "public/assets/items/front/selectors/front15.png"
+				},
+				"item": {
+					"name": "front15",
+					"file": "public/assets/items/front/front15.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background16.png",
-				"name": "background16"
+				"selector": {
+					"name": "front16Selector",
+					"file": "public/assets/items/front/selectors/front16.png"
+				},
+				"item": {
+					"name": "front16",
+					"file": "public/assets/items/front/front16.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background17.png",
-				"name": "background17"
+				"selector": {
+					"name": "front17Selector",
+					"file": "public/assets/items/front/selectors/front17.png"
+				},
+				"item": {
+					"name": "front17",
+					"file": "public/assets/items/front/front17.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background18.png",
-				"name": "background18"
+				"selector": {
+					"name": "front18Selector",
+					"file": "public/assets/items/front/selectors/front18.png"
+				},
+				"item": {
+					"name": "front18",
+					"file": "public/assets/items/front/front18.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background19.png",
-				"name": "background19"
+				"selector": {
+					"name": "front19Selector",
+					"file": "public/assets/items/front/selectors/front19.png"
+				},
+				"item": {
+					"name": "front19",
+					"file": "public/assets/items/front/front19.png"
+				}
 			},
 			{
-				"file": "public/assets/img/items/background/background20.png",
-				"name": "background20"
+				"selector": {
+					"name": "front20Selector",
+					"file": "public/assets/items/front/selectors/front20.png"
+				},
+				"item": {
+					"name": "front20",
+					"file": "public/assets/items/front/front20.png"
+				}
 			}
 		]
 	},
 	"sound": {
 		"items": [
 			{
-				"file": "public/assets/sounds/items/sound1.mp3",
-				"name": "sound1"
+				"selector": {
+					"name": "sound1Selector",
+					"file": "public/assets/items/sound/selectors/sound1.png"
+				},
+				"item": {
+					"name": "sound1",
+					"file": "public/assets/items/sound/sound1.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound2.mp3",
-				"name": "sound2"
+				"selector": {
+					"name": "sound2Selector",
+					"file": "public/assets/items/sound/selectors/sound2.png"
+				},
+				"item": {
+					"name": "sound2",
+					"file": "public/assets/items/sound/sound2.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound3.mp3",
-				"name": "sound3"
+				"selector": {
+					"name": "sound3Selector",
+					"file": "public/assets/items/sound/selectors/sound3.png"
+				},
+				"item": {
+					"name": "sound3",
+					"file": "public/assets/items/sound/sound3.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound4.mp3",
-				"name": "sound4"
+				"selector": {
+					"name": "sound4Selector",
+					"file": "public/assets/items/sound/selectors/sound4.png"
+				},
+				"item": {
+					"name": "sound4",
+					"file": "public/assets/items/sound/sound4.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound5.mp3",
-				"name": "sound5"
+				"selector": {
+					"name": "sound5Selector",
+					"file": "public/assets/items/sound/selectors/sound5.png"
+				},
+				"item": {
+					"name": "sound5",
+					"file": "public/assets/items/sound/sound5.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound6.mp3",
-				"name": "sound6"
+				"selector": {
+					"name": "sound6Selector",
+					"file": "public/assets/items/sound/selectors/sound6.png"
+				},
+				"item": {
+					"name": "sound6",
+					"file": "public/assets/items/sound/sound6.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound7.mp3",
-				"name": "sound7"
+				"selector": {
+					"name": "sound7Selector",
+					"file": "public/assets/items/sound/selectors/sound7.png"
+				},
+				"item": {
+					"name": "sound7",
+					"file": "public/assets/items/sound/sound7.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound8.mp3",
-				"name": "sound8"
+				"selector": {
+					"name": "sound8Selector",
+					"file": "public/assets/items/sound/selectors/sound8.png"
+				},
+				"item": {
+					"name": "sound8",
+					"file": "public/assets/items/sound/sound8.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound9.mp3",
-				"name": "sound9"
+				"selector": {
+					"name": "sound9Selector",
+					"file": "public/assets/items/sound/selectors/sound9.png"
+				},
+				"item": {
+					"name": "sound9",
+					"file": "public/assets/items/sound/sound9.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound10.mp3",
-				"name": "sound10"
+				"selector": {
+					"name": "sound10Selector",
+					"file": "public/assets/items/sound/selectors/sound10.png"
+				},
+				"item": {
+					"name": "sound10",
+					"file": "public/assets/items/sound/sound10.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound11.mp3",
-				"name": "sound11"
+				"selector": {
+					"name": "sound11Selector",
+					"file": "public/assets/items/sound/selectors/sound11.png"
+				},
+				"item": {
+					"name": "sound11",
+					"file": "public/assets/items/sound/sound11.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound12.mp3",
-				"name": "sound12"
+				"selector": {
+					"name": "sound12Selector",
+					"file": "public/assets/items/sound/selectors/sound12.png"
+				},
+				"item": {
+					"name": "sound12",
+					"file": "public/assets/items/sound/sound12.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound13.mp3",
-				"name": "sound13"
+				"selector": {
+					"name": "sound13Selector",
+					"file": "public/assets/items/sound/selectors/sound13.png"
+				},
+				"item": {
+					"name": "sound13",
+					"file": "public/assets/items/sound/sound13.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound14.mp3",
-				"name": "sound14"
+				"selector": {
+					"name": "sound14Selector",
+					"file": "public/assets/items/sound/selectors/sound14.png"
+				},
+				"item": {
+					"name": "sound14",
+					"file": "public/assets/items/sound/sound14.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound15.mp3",
-				"name": "sound15"
+				"selector": {
+					"name": "sound15Selector",
+					"file": "public/assets/items/sound/selectors/sound15.png"
+				},
+				"item": {
+					"name": "sound15",
+					"file": "public/assets/items/sound/sound15.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound16.mp3",
-				"name": "sound16"
+				"selector": {
+					"name": "sound16Selector",
+					"file": "public/assets/items/sound/selectors/sound16.png"
+				},
+				"item": {
+					"name": "sound16",
+					"file": "public/assets/items/sound/sound16.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound17.mp3",
-				"name": "sound17"
+				"selector": {
+					"name": "sound17Selector",
+					"file": "public/assets/items/sound/selectors/sound17.png"
+				},
+				"item": {
+					"name": "sound17",
+					"file": "public/assets/items/sound/sound17.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound18.mp3",
-				"name": "sound18"
+				"selector": {
+					"name": "sound18Selector",
+					"file": "public/assets/items/sound/selectors/sound18.png"
+				},
+				"item": {
+					"name": "sound18",
+					"file": "public/assets/items/sound/sound18.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound19.mp3",
-				"name": "sound19"
+				"selector": {
+					"name": "sound19Selector",
+					"file": "public/assets/items/sound/selectors/sound19.png"
+				},
+				"item": {
+					"name": "sound19",
+					"file": "public/assets/items/sound/sound19.png"
+				}
 			},
 			{
-				"file": "public/assets/sounds/items/sound20.mp3",
-				"name": "sound20"
+				"selector": {
+					"name": "sound20Selector",
+					"file": "public/assets/items/sound/selectors/sound20.png"
+				},
+				"item": {
+					"name": "sound20",
+					"file": "public/assets/items/sound/sound20.png"
+				}
 			}
 		]
 	}

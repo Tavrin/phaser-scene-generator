@@ -1,110 +1,16 @@
 import Phaser from 'phaser'
 import ItemSelector from "../gameObjects/ItemSelector";
 import ItemPickingBoard from "../gameObjects/ItemPickingBoard";
+const itemsJson= require('../items.json');
 
 const centerWidth = window.innerWidth / 2;
 const centerHeight = window.innerHeight / 2;
-const FRONT_TYPE = 'front';
-const BACK_TYPE = 'back';
-const TOTAL_BACK_TYPE = 'background';
-const SOUND_TYPE = 'sound';
 const PICK_BOARDS = [
     'boardImageBackground',
     'boardImageBack',
     'boardImageFront',
     'boardImageSound',
 ]
-const FRONT_ITEMS = [
-    'front1',
-    'front2',
-    'front3',
-    'front4',
-    'front5',
-    'front6',
-    'front7',
-    'front8',
-    'front9',
-    'front10',
-    'front11',
-    'front12',
-    'front13',
-    'front14',
-    'front15',
-    'front16',
-    'front17',
-    'front18',
-    'front19',
-    'front20',
-];
-
-const SOUND_ITEMS = [
-    'front1',
-    'front2',
-    'front3',
-    'front4',
-    'front5',
-    'front6',
-    'front7',
-    'front8',
-    'front9',
-    'front10',
-    'front11',
-    'front12',
-    'front13',
-    'front14',
-    'front15',
-    'front16',
-    'front17',
-    'front18',
-    'front19',
-    'front20',
-];
-
-const BACK_ITEMS = [
-    'back1',
-    'back2',
-    'back3',
-    'back4',
-    'back5',
-    'back6',
-    'back7',
-    'back8',
-    'back9',
-    'back10',
-    'back11',
-    'back12',
-    'back13',
-    'back14',
-    'back15',
-    'back16',
-    'back17',
-    'back18',
-    'back19',
-    'back20',
-];
-
-const BACKGROUND_ITEMS = [
-    'back1',
-    'back2',
-    'back3',
-    'back4',
-    'back5',
-    'back6',
-    'back7',
-    'back8',
-    'back9',
-    'back10',
-    'back11',
-    'back12',
-    'back13',
-    'back14',
-    'back15',
-    'back16',
-    'back17',
-    'back18',
-    'back19',
-    'back20',
-];
 
     export default class GameScreen extends Phaser.Scene
 {
@@ -112,20 +18,24 @@ const BACKGROUND_ITEMS = [
     {
         super('GameScreen')
         this.selectors = [];
-        this.types = [TOTAL_BACK_TYPE, BACK_TYPE, FRONT_TYPE, SOUND_TYPE];
-        this.itemsNamesList = {
-            [TOTAL_BACK_TYPE]: BACKGROUND_ITEMS,
-            [BACK_TYPE]: BACK_ITEMS,
-            [FRONT_TYPE]: FRONT_ITEMS,
-            [SOUND_TYPE]: SOUND_ITEMS,
-        }
+        this.types = [];
+        this.itemsNamesList = {};
+
         this.pickingBoards = [];
-        this.selectedItems = {
-            [TOTAL_BACK_TYPE]: [],
-            [BACK_TYPE]: [],
-            [FRONT_TYPE]: [],
-            [SOUND_TYPE]: []
+        this.selectedItems = {};
+
+        for (let type in itemsJson) {
+            console.log(type);
+            this.itemsNamesList[type] = [];
+            this.selectedItems[type] = [];
+            this.types.push(type);
+
+            for (let i in itemsJson[type].items) {
+                this.itemsNamesList[type].push(itemsJson[type].items[i]['selector'].name);
+            }
         }
+
+        console.log(this.itemsNamesList);
     }
 
     preload()
@@ -144,8 +54,7 @@ const BACKGROUND_ITEMS = [
         this.load.image(PICK_BOARDS[3], 'public/assets/img/pickboard-sound.png');
         this.load.image('back', 'public/assets/img/retour.png');
 
-        this.loadFrontImages();
-        this.loadBackImages();
+        this.loadItems();
     }
 
     create()
@@ -242,51 +151,39 @@ const BACKGROUND_ITEMS = [
         }
     }
 
-    loadFrontImages()
+    loadItems()
     {
-        this.load.image(FRONT_ITEMS[0], 'public/assets/img/items/front/front1.png');
-        this.load.image(FRONT_ITEMS[1], 'public/assets/img/items/front/front2.png');
-        this.load.image(FRONT_ITEMS[2], 'public/assets/img/items/front/front1.png');
-        this.load.image(FRONT_ITEMS[3], 'public/assets/img/items/front/front2.png');
-        this.load.image(FRONT_ITEMS[4], 'public/assets/img/items/front/front1.png');
-        this.load.image(FRONT_ITEMS[5], 'public/assets/img/items/front/front2.png');
-        this.load.image(FRONT_ITEMS[6], 'public/assets/img/items/front/front1.png');
-        this.load.image(FRONT_ITEMS[7], 'public/assets/img/items/front/front2.png');
-        this.load.image(FRONT_ITEMS[8], 'public/assets/img/items/front/front1.png');
-        this.load.image(FRONT_ITEMS[9], 'public/assets/img/items/front/front2.png');
-        this.load.image(FRONT_ITEMS[10], 'public/assets/img/items/front/front1.png');
-        this.load.image(FRONT_ITEMS[11], 'public/assets/img/items/front/front2.png');
-        this.load.image(FRONT_ITEMS[12], 'public/assets/img/items/front/front1.png');
-        this.load.image(FRONT_ITEMS[13], 'public/assets/img/items/front/front2.png');
-        this.load.image(FRONT_ITEMS[14], 'public/assets/img/items/front/front1.png');
-        this.load.image(FRONT_ITEMS[15], 'public/assets/img/items/front/front2.png');
-        this.load.image(FRONT_ITEMS[16], 'public/assets/img/items/front/front1.png');
-        this.load.image(FRONT_ITEMS[17], 'public/assets/img/items/front/front2.png');
-        this.load.image(FRONT_ITEMS[18], 'public/assets/img/items/front/front1.png');
-        this.load.image(FRONT_ITEMS[19], 'public/assets/img/items/front/front2.png');
+        for (let y in this.types) {
+            console.log(y);
+            if (y === 'sound') {
+                continue;
+            }
+
+            for (let i in itemsJson[this.types[y]].items) {
+                const item = itemsJson[this.types[y]].items[i];
+                this.load.image(item['selector'].name, item['selector'].file);
+            }
+        }
+
     }
 
     loadBackImages()
     {
-        this.load.image(BACK_ITEMS[0], 'public/assets/img/items/back/back1.png');
-        this.load.image(BACK_ITEMS[1], 'public/assets/img/items/back/back2.png');
-        this.load.image(BACK_ITEMS[2], 'public/assets/img/items/back/back3.png');
-        this.load.image(BACK_ITEMS[3], 'public/assets/img/items/back/back4.png');
-        this.load.image(BACK_ITEMS[4], 'public/assets/img/items/back/back5.png');
-        this.load.image(BACK_ITEMS[5], 'public/assets/img/items/back/back1.png');
-        this.load.image(BACK_ITEMS[6], 'public/assets/img/items/back/back2.png');
-        this.load.image(BACK_ITEMS[7], 'public/assets/img/items/back/back3.png');
-        this.load.image(BACK_ITEMS[8], 'public/assets/img/items/back/back4.png');
-        this.load.image(BACK_ITEMS[9], 'public/assets/img/items/back/back5.png');
-        this.load.image(BACK_ITEMS[10], 'public/assets/img/items/back/back1.png');
-        this.load.image(BACK_ITEMS[11], 'public/assets/img/items/back/back2.png');
-        this.load.image(BACK_ITEMS[12], 'public/assets/img/items/back/back3.png');
-        this.load.image(BACK_ITEMS[13], 'public/assets/img/items/back/back4.png');
-        this.load.image(BACK_ITEMS[14], 'public/assets/img/items/back/back5.png');
-        this.load.image(BACK_ITEMS[15], 'public/assets/img/items/back/back1.png');
-        this.load.image(BACK_ITEMS[16], 'public/assets/img/items/back/back2.png');
-        this.load.image(BACK_ITEMS[17], 'public/assets/img/items/back/back3.png');
-        this.load.image(BACK_ITEMS[18], 'public/assets/img/items/back/back4.png');
-        this.load.image(BACK_ITEMS[19], 'public/assets/img/items/back/back5.png');
+        for (let i in itemsJson['back'].items) {
+            const item = itemsJson['back'].items[i];
+            this.load.image(item.name, item.file);
+        }
+    }
+
+    loadBackGrounds()
+    {
+        for (let i in itemsJson['background'].items) {
+            const item = itemsJson['background'].items[i];
+            this.load.image(item.name, item.file);
+        }
+    }
+
+    loadSounds()
+    {
     }
 }
