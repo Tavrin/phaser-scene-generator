@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 const jsonData= require('../items.json');
+const MINIMAL_DISTANCE = 250;
 
 export default class RenderScreen extends Phaser.Scene
 {
@@ -10,7 +11,6 @@ export default class RenderScreen extends Phaser.Scene
         this.backGrounds = [];
         this.screenCenterX = null;
         this.screenCenterY = null;
-        this.setRetry = false;
         this.maxTries = 5000;
     }
 
@@ -60,71 +60,73 @@ export default class RenderScreen extends Phaser.Scene
             this.backGrounds.push(image);
         }
 
-       /* for (let i = 0; i < this.backGrounds.length; i++) {
-            if (i === 0) {
-                continue;
+        if (this.backGrounds.length > 1) {
+            this.backGrounds.reverse();
+
+            let backgroundsLength = this.backGrounds.length;
+
+            for (let i = 0; i < this.backGrounds.length; i++) {
+                this.backGrounds[i].setDepth(backgroundsLength);
+                backgroundsLength--;
             }
 
-            this.backGrounds[i].alpha = 0;
-        }*/
-
-        this.backGrounds.reverse();
-
-        for (let i = 0; i < this.backGrounds.length; i++) {
-            if (i === 0) {
-                this.backGrounds[i].alpha = 1;
-                continue;
-            }
-
-            this.backGrounds[i].alpha = 0;
+            this.setTween();
         }
+    }
 
-            this.tweens.add({
-                targets: this.backGrounds[0],
-                alpha: 0,
-                ease: 'Power1',
-                duration: 3000,
-                repeat: -1,
-                onRepeat: () => {
-                    let tempImage = this.backGrounds.shift();
-                    this.backGrounds.push(tempImage);
+    setTween()
+    {
+        let tween = this.tweens.add({
+            targets: this.backGrounds[0],
+            alpha: 0,
+            ease: 'Power1',
+            duration: 6000,
+            repeat: 0,
+            onStart: () => {
+            },
+            onUpdate: () => {
+            },
+            onComplete: () => {
+                let tempImage = this.backGrounds.shift();
+                this.backGrounds.push(tempImage);
 
-                    for (let i = 0; i < this.backGrounds.length; i++) {
-                        if (i === 0) {
-                            this.backGrounds[i].alpha = 1;
-                            continue;
-                        }
+                let backgroundsLength = this.backGrounds.length;
+                console.log(backgroundsLength);
+                for (let i = 0; i < this.backGrounds.length; i++) {
+                    this.backGrounds[i].setDepth(backgroundsLength);
+                    backgroundsLength--;
 
-                        this.backGrounds[i].alpha = 0;
+                    if (i === this.backGrounds.length - 1) {
+                        console.log('test');
+                        this.backGrounds[i].alpha = 1;
                     }
-                },
-            });
+                }
+                tween.remove();
+                this.setTween();
+                console.log('complete');
+                window.removeEventListener('focus', this.setFocus);
+            }
+        });
 
+        window.addEventListener("focus", this.setFocus(tween));
+    }
+
+    setFocus(tween)
+    {
+        tween.restart();
+        return tween;
     }
 
     renderSprites(type, y)
     {
         let sprites = [];
-        let setPositions = [];
+        let setPositions = this.setPositions(this.selectedItems[type].length);
 
         for (let i in this.selectedItems[type]) {
             console.log( this.selectedItems[type][i]);
             let sprite = this.add.sprite(this.screenCenterX / 2.2,  y, this.selectedItems[type][i]);
-            sprite.setDepth(2);
+            sprite.setDepth(999);
             sprites.push(sprite);
-
-            sprites = this.shuffleArray(sprites);
-
-            let x = 0;
-            const currentTry = 0;
-
-            let currentPosX = this.setRandomPosX(setPositions, currentTry);
-
-            while (this.setRetry === true && currentTry <= this.maxTries) {
-                currentPosX = this.setRandomPosX(setPositions, currentTry);
-            }
-
-            setPositions.push(currentPosX);
         }
 
         console.log(setPositions);
@@ -133,23 +135,54 @@ export default class RenderScreen extends Phaser.Scene
         }
     }
 
-    setRandomPosX(setPositions, currentTry)
-    {
-        this.setRetry = false;
-        let currentPosX = Math.floor(Math.random() * (window.innerWidth / 1.1 - 40 + 1)) +40;
+    setPositions(numPoints) {
+        let currentTry = 0;
+        let newPosX;
+        let setPositions = [];
+        let triedPositions = [];
+        let maxTries = 1000;
 
-        for (let j in setPositions) {
-            while (Math.abs(setPositions[j] - currentPosX) < 150) {
-                currentPosX = Math.floor(Math.random() * (window.innerWidth / 1.1 - 40 + 1)) +40;
+        while (setPositions.length < numPoints) {
+            newPosX = this.setRandomPosX(triedPositions);
+            console.log('newPosX: ' + newPosX)
 
-                if (currentTry < this.maxTries) {
-                    console.log(currentTry)
-                    this.setRetry = true;
+            for (let i = 0; i < setPositions.length; i++) {
+                console.log('----------------------')
+                console.log('diff: ' + Math.abs(setPositions[i] - newPosX))
+                console.log('setPositions:' +  setPositions[i])
+                console.log('newPosX: ' + newPosX)
+                console.log('i:' + i);
+                console.log('currentTry:' + currentTry);
+                console.log('----------------------')
+                const diff = Math.abs(setPositions[i] - newPosX);
+
+                if (diff < MINIMAL_DISTANCE && currentTry < maxTries) {
+                    console.log('in the boucle')
+                    console.log('triedpositions: ' + triedPositions);
+                    triedPositions.push(newPosX);
+                    newPosX = this.setRandomPosX(triedPositions);
+                    currentTry += 1;
+                    i = -1;
                 }
             }
+
+            console.log('is okay');
+            currentTry = 0;
+            setPositions.push(newPosX);
         }
 
-        return currentPosX;
+        return setPositions;
+    }
+
+    setRandomPosX(triedPositions) {
+        let newPosX;
+        let currentTry = 0;
+        do {
+            newPosX = Math.floor(Math.random() * (window.innerWidth / 1.1 - 40 + 1)) +40;
+            currentTry++;
+        } while (triedPositions.includes(newPosX) && currentTry < 5000)
+
+        return newPosX;
     }
 
     shuffleArray(array)
