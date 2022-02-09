@@ -30,9 +30,13 @@ export default class RenderScreen extends Phaser.Scene
                     continue;
                 }
 
-                this.load.image(item['item'].name, item['item'].file);
+                if (type === 'sound') {
+                    this.load.audio(item['item'].name, item['item'].file);
+                } else {
+                    this.load.image(item['item'].name, item['item'].file);
+                }
+
                 this.selectedItems[type].push(item['item'].name);
-                console.log(item['item']);
             }
         }
     }
@@ -48,6 +52,18 @@ export default class RenderScreen extends Phaser.Scene
         this.renderBackground();
         this.renderSprites('back', 560);
         this.renderSprites('front', 800);
+        this.setAudio();
+    }
+
+    setAudio(index = 0)
+    {
+        let sound = this.sound.add(this.selectedItems['sound'][index])
+        sound.play();
+        sound.on('complete', () => {
+            if (index < this.selectedItems['sound'].length - 1) {
+                this.setAudio(++index)
+            }
+        })
     }
 
     renderBackground()
@@ -91,19 +107,16 @@ export default class RenderScreen extends Phaser.Scene
                 this.backGrounds.push(tempImage);
 
                 let backgroundsLength = this.backGrounds.length;
-                console.log(backgroundsLength);
                 for (let i = 0; i < this.backGrounds.length; i++) {
                     this.backGrounds[i].setDepth(backgroundsLength);
                     backgroundsLength--;
 
                     if (i === this.backGrounds.length - 1) {
-                        console.log('test');
                         this.backGrounds[i].alpha = 1;
                     }
                 }
                 tween.remove();
                 this.setTween();
-                console.log('complete');
                 window.removeEventListener('focus', this.setFocus);
             }
         });
@@ -123,13 +136,11 @@ export default class RenderScreen extends Phaser.Scene
         let setPositions = this.setPositions(this.selectedItems[type].length);
 
         for (let i in this.selectedItems[type]) {
-            console.log( this.selectedItems[type][i]);
             let sprite = this.add.sprite(this.screenCenterX / 2.2,  y, this.selectedItems[type][i]);
             sprite.setDepth(999);
             sprites.push(sprite);
         }
 
-        console.log(setPositions);
         for (let i in setPositions) {
             sprites[i].setPosition(setPositions[i],  y);
         }
@@ -144,21 +155,11 @@ export default class RenderScreen extends Phaser.Scene
 
         while (setPositions.length < numPoints) {
             newPosX = this.setRandomPosX(triedPositions);
-            console.log('newPosX: ' + newPosX)
 
             for (let i = 0; i < setPositions.length; i++) {
-                console.log('----------------------')
-                console.log('diff: ' + Math.abs(setPositions[i] - newPosX))
-                console.log('setPositions:' +  setPositions[i])
-                console.log('newPosX: ' + newPosX)
-                console.log('i:' + i);
-                console.log('currentTry:' + currentTry);
-                console.log('----------------------')
                 const diff = Math.abs(setPositions[i] - newPosX);
 
                 if (diff < MINIMAL_DISTANCE && currentTry < maxTries) {
-                    console.log('in the boucle')
-                    console.log('triedpositions: ' + triedPositions);
                     triedPositions.push(newPosX);
                     newPosX = this.setRandomPosX(triedPositions);
                     currentTry += 1;
@@ -166,7 +167,6 @@ export default class RenderScreen extends Phaser.Scene
                 }
             }
 
-            console.log('is okay');
             currentTry = 0;
             setPositions.push(newPosX);
         }

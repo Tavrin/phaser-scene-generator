@@ -2,18 +2,26 @@ import Phaser from 'phaser'
 
 export default class ItemPickingBoard extends Phaser.GameObjects.Container {
     constructor(data) {
-        let { scene, type, x , y, board, filter, itemsNames, back} = data;
+        let { scene, type, x , y, board, filter, itemsNames, back, next, previous} = data;
         let boardImage = new Phaser.GameObjects.Sprite(scene,0, 0, board);
-        let backImage = new Phaser.GameObjects.Sprite(scene, 0, 385, back);
+        let backImage = new Phaser.GameObjects.Sprite(scene,0, 400, back);
+        let nextItems = new Phaser.GameObjects.Sprite(scene,450, 0, next,);
+        let previousItems = new Phaser.GameObjects.Sprite(scene,-450, 0, previous);
         backImage.setInteractive();
         boardImage.setInteractive();
-        super(scene, x, y, [boardImage, backImage]);
+        nextItems.setInteractive();
+        previousItems.setInteractive();
+
+        super(scene, x, y, [boardImage, backImage, nextItems, previousItems]);
 
         backImage.on('pointerdown', () => {
             this.hide();
         })
 
         this.backImage = backImage;
+        this.nextItems = nextItems;
+        this.previousItems = previousItems;
+        this.currentPageIndex = 0;
         this.boardImage = boardImage;
         this.filter = filter;
         this.scene = scene;
@@ -26,6 +34,7 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
         this.isOpen = false;
         scene.add.existing(this);
         this.addItems();
+        this.setPagination();
         this.visible = this.isOpen;
     }
 
@@ -38,7 +47,6 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
         this.filter.visible = true;
         this.scene.children.bringToTop(this);
         this.visible = this.isOpen = true;
-
     }
 
     hide() {
@@ -55,18 +63,30 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
         this.itemSelector = itemSelector;
     }
 
-    hideBackgroundBoard()
-    {
+    hideBackgroundBoard() {
         this.scene.add.sprite()
     }
 
-    addItems()
-    {
-        let posX = -230;
-        let posY = -145;
-        let currentIndex = 0;
+    addItems() {
+        let posX, posY;
+        let y = 0;
 
         for (let i = 0; i < this.itemsNames.length; i++) {
+            if (0 === (i) % 20 || i === 0) {
+                if (i !== 0) {
+                    y ++;
+                }
+
+                this.items[y] = [];
+                posX = -230;
+                posY = -145;
+            } else if (0 === (i) % 5) {
+                posY += 115;
+                posX = -230;
+            } else {
+                posX += 115;
+            }
+
             let sprite = new Phaser.GameObjects.Sprite(this.scene, posX, posY, this.itemsNames[i]);
             sprite.setInteractive();
             sprite.on('pointerdown',() => {
@@ -74,19 +94,47 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
                 this.hide();
             })
 
-            this.items.push(sprite);
-
-            posX += 115;
-
-            if (0 === (i + 1) % 5) {
-                currentIndex++;
-                posY += 115;
-                posX = -230;
-            }
+            this.items[y].push(sprite);
         }
 
-        this.add(this.items);
+        for (let i = 0; i < this.items.length; i++) {
+            this.add(this.items[i]);
+        }
 
         this.bringToTop(this.backImage);
+    }
+
+    setPagination() {
+        this.previousItems.on('pointerdown', () => {
+            this.changePage(false);
+        })
+
+        this.nextItems.on('pointerdown', () => {
+            this.changePage();
+        })
+
+        this.previousItems.setVisible(false);
+
+        if (this.items.length === 1) {
+            this.nextItems.setVisible(false)
+        }
+    }
+
+    hidePageItems() {
+
+    }
+
+    changePage(isPageForward = true) {
+        for (let i = 0; i <this.items[this.currentPageIndex].length; i++) {
+            this.items[this.currentPageIndex][i].setVisible(false);
+        }
+
+        isPageForward ? this.currentPageIndex ++ : this.currentPageIndex --;
+        this.currentPageIndex <= 0 ? this.previousItems.setVisible(false) : this.previousItems.setVisible(true);
+        this.currentPageIndex >= this.items.length - 1 ? this.nextItems.setVisible(false) : this.nextItems.setVisible(true);
+
+        for (let i = 0; i <this.items[this.currentPageIndex].length; i++) {
+            this.items[this.currentPageIndex][i].setVisible(true);
+        }
     }
 }

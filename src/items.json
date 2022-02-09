@@ -641,7 +641,7 @@
 				},
 				"item": {
 					"name": "sound1",
-					"file": "public/assets/items/sound/sound1.png"
+					"file": "public/assets/items/sound/sound1.wav"
 				}
 			},
 			{
@@ -651,7 +651,7 @@
 				},
 				"item": {
 					"name": "sound2",
-					"file": "public/assets/items/sound/sound2.png"
+					"file": "public/assets/items/sound/sound2.wav"
 				}
 			},
 			{
@@ -661,7 +661,7 @@
 				},
 				"item": {
 					"name": "sound3",
-					"file": "public/assets/items/sound/sound3.png"
+					"file": "public/assets/items/sound/sound3.wav"
 				}
 			},
 			{
@@ -671,7 +671,7 @@
 				},
 				"item": {
 					"name": "sound4",
-					"file": "public/assets/items/sound/sound4.png"
+					"file": "public/assets/items/sound/sound4.wav"
 				}
 			},
 			{
@@ -681,7 +681,7 @@
 				},
 				"item": {
 					"name": "sound5",
-					"file": "public/assets/items/sound/sound5.png"
+					"file": "public/assets/items/sound/sound5.wav"
 				}
 			},
 			{
@@ -691,7 +691,7 @@
 				},
 				"item": {
 					"name": "sound6",
-					"file": "public/assets/items/sound/sound6.png"
+					"file": "public/assets/items/sound/sound6.wav"
 				}
 			},
 			{
@@ -701,7 +701,7 @@
 				},
 				"item": {
 					"name": "sound7",
-					"file": "public/assets/items/sound/sound7.png"
+					"file": "public/assets/items/sound/sound7.wav"
 				}
 			},
 			{
@@ -711,7 +711,7 @@
 				},
 				"item": {
 					"name": "sound8",
-					"file": "public/assets/items/sound/sound8.png"
+					"file": "public/assets/items/sound/sound8.wav"
 				}
 			},
 			{
@@ -721,7 +721,7 @@
 				},
 				"item": {
 					"name": "sound9",
-					"file": "public/assets/items/sound/sound9.png"
+					"file": "public/assets/items/sound/sound9.wav"
 				}
 			},
 			{
@@ -731,7 +731,7 @@
 				},
 				"item": {
 					"name": "sound10",
-					"file": "public/assets/items/sound/sound10.png"
+					"file": "public/assets/items/sound/sound10.wav"
 				}
 			},
 			{
@@ -741,7 +741,7 @@
 				},
 				"item": {
 					"name": "sound11",
-					"file": "public/assets/items/sound/sound11.png"
+					"file": "public/assets/items/sound/sound11.wav"
 				}
 			},
 			{
@@ -751,7 +751,7 @@
 				},
 				"item": {
 					"name": "sound12",
-					"file": "public/assets/items/sound/sound12.png"
+					"file": "public/assets/items/sound/sound12.wav"
 				}
 			},
 			{
@@ -761,7 +761,7 @@
 				},
 				"item": {
 					"name": "sound13",
-					"file": "public/assets/items/sound/sound13.png"
+					"file": "public/assets/items/sound/sound13.wav"
 				}
 			},
 			{
@@ -771,7 +771,7 @@
 				},
 				"item": {
 					"name": "sound14",
-					"file": "public/assets/items/sound/sound14.png"
+					"file": "public/assets/items/sound/sound14.wav"
 				}
 			},
 			{
@@ -781,7 +781,7 @@
 				},
 				"item": {
 					"name": "sound15",
-					"file": "public/assets/items/sound/sound15.png"
+					"file": "public/assets/items/sound/sound15.wav"
 				}
 			},
 			{
@@ -791,7 +791,7 @@
 				},
 				"item": {
 					"name": "sound16",
-					"file": "public/assets/items/sound/sound16.png"
+					"file": "public/assets/items/sound/sound16.wav"
 				}
 			},
 			{
@@ -801,7 +801,7 @@
 				},
 				"item": {
 					"name": "sound17",
-					"file": "public/assets/items/sound/sound17.png"
+					"file": "public/assets/items/sound/sound17.wav"
 				}
 			},
 			{
@@ -811,7 +811,7 @@
 				},
 				"item": {
 					"name": "sound18",
-					"file": "public/assets/items/sound/sound18.png"
+					"file": "public/assets/items/sound/sound18.wav"
 				}
 			},
 			{
@@ -821,7 +821,7 @@
 				},
 				"item": {
 					"name": "sound19",
-					"file": "public/assets/items/sound/sound19.png"
+					"file": "public/assets/items/sound/sound19.wav"
 				}
 			},
 			{
@@ -831,7 +831,47 @@
 				},
 				"item": {
 					"name": "sound20",
-					"file": "public/assets/items/sound/sound20.png"
+					"file": "public/assets/items/sound/sound20.wav"
+				}
+			},
+			{
+				"selector": {
+					"name": "sound21Selector",
+					"file": "public/assets/items/sound/selectors/sound21.png"
+				},
+				"item": {
+					"name": "sound21",
+					"file": "public/assets/items/sound/sound21.wav"
+				}
+			},
+			{
+				"selector": {
+					"name": "sound22Selector",
+					"file": "public/assets/items/sound/selectors/sound22.png"
+				},
+				"item": {
+					"name": "sound22",
+					"file": "public/assets/items/sound/sound22.wav"
+				}
+			},
+			{
+				"selector": {
+					"name": "sound23Selector",
+					"file": "public/assets/items/sound/selectors/sound23.png"
+				},
+				"item": {
+					"name": "sound23",
+					"file": "public/assets/items/sound/sound23.wav"
+				}
+			},
+			{
+				"selector": {
+					"name": "sound24Selector",
+					"file": "public/assets/items/sound/selectors/sound24.png"
+				},
+				"item": {
+					"name": "sound24",
+					"file": "public/assets/items/sound/sound24.wav"
 				}
 			}
 		]

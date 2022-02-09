@@ -25,7 +25,6 @@ const PICK_BOARDS = [
         this.selectedItems = {};
 
         for (let type in itemsJson) {
-            console.log(type);
             this.itemsNamesList[type] = [];
             this.selectedItems[type] = [];
             this.types.push(type);
@@ -48,6 +47,8 @@ const PICK_BOARDS = [
         this.load.image('labelFront', 'public/assets/img/label-front.png');
         this.load.image('labelBack', 'public/assets/img/label-back.png');
         this.load.image('blackFilter', 'public/assets/img/filter.png');
+        this.load.image('nextItemsPage', 'public/assets/img/next.png');
+        this.load.image('previousItemsPage', 'public/assets/img/previous.png');
         this.load.image(PICK_BOARDS[0], 'public/assets/img/pickboard-background.png');
         this.load.image(PICK_BOARDS[1], 'public/assets/img/pickboard-back.png');
         this.load.image(PICK_BOARDS[2], 'public/assets/img/pickboard-front.png');
@@ -105,7 +106,7 @@ const PICK_BOARDS = [
     setPickingBoard(screenCenterX, screenCenterY, filter, backImage)
     {
         for (let i = 0; i < this.types.length; i++) {
-            for (let y = 0; y < 5; y++) {
+            for (let y = 0; 'sound' === this.types[i] ? y < 20 : y < 5; y++) {
                 let pickingBoard = new ItemPickingBoard({
                     scene: this,
                     type: this.types[i],
@@ -114,7 +115,9 @@ const PICK_BOARDS = [
                     board: PICK_BOARDS[i],
                     filter: filter,
                     back: backImage,
-                    itemsNames: this.itemsNamesList[this.types[i]]
+                    itemsNames: this.itemsNamesList[this.types[i]],
+                    next: 'nextItemsPage',
+                    previous: 'previousItemsPage',
                 })
 
                 this.pickingBoards.push(pickingBoard);
@@ -127,60 +130,54 @@ const PICK_BOARDS = [
         let currentItemX = screenCenterX / 1.5;
         let currentItemY = 150;
         let currentTypeIndex = 0;
-        console.log(this.pickingBoards)
+        let soundIndex = 0;
 
-        for (let i = 0; i < 20 ; i++) {
-            this.selectors.push(
-                new ItemSelector({
-                    scene : this,
-                    x: currentItemX,
-                    y: currentItemY,
-                    image : 'addItemButton',
-                    type : this.types[currentTypeIndex],
-                    pickingBoard : this.pickingBoards[i],
-                })
-            )
+        for (let i = 0; i < 35 ; i++) {
+            let itemSelector = new ItemSelector({
+                scene : this,
+                x: currentItemX,
+                y: currentItemY,
+                image : 'addItemButton',
+                type : this.types[currentTypeIndex],
+                pickingBoard : this.pickingBoards[i],
+            })
 
-            currentItemX += 150;
-
-            if (0 === (i + 1) % 5) {
-                currentTypeIndex++;
-                currentItemY += 150;
-                currentItemX = screenCenterX / 1.5;
+            if (i < 15) {
+                currentItemX += 150;
             }
+
+            if ('sound' === this.types[currentTypeIndex]) {
+                if (0 === (soundIndex + 1) % 5 && 0 !== (soundIndex + 1) % 10) {
+                    currentItemX += 100;
+                } else if (0 === (soundIndex + 1) % 10) {
+                    currentItemY += 70;
+                    currentItemX = screenCenterX / 1.6;
+                } else {
+                    currentItemX += 70;
+                }
+
+                itemSelector.setScale(0.5, 0.5);
+                soundIndex += 1;
+            }
+
+            if (0 === (i + 1) % 5 && 15 >= i) {
+                currentTypeIndex++;
+                'sound' === this.types[currentTypeIndex] ? (currentItemX = screenCenterX / 1.6, currentItemY += 130) : (currentItemX = screenCenterX / 1.5, currentItemY += 150);
+            }
+
+            this.selectors.push(itemSelector)
         }
     }
 
     loadItems()
     {
         for (let y in this.types) {
-            console.log(y);
-            if (y === 'sound') {
-                continue;
-            }
-
             for (let i in itemsJson[this.types[y]].items) {
                 const item = itemsJson[this.types[y]].items[i];
                 this.load.image(item['selector'].name, item['selector'].file);
             }
         }
 
-    }
-
-    loadBackImages()
-    {
-        for (let i in itemsJson['back'].items) {
-            const item = itemsJson['back'].items[i];
-            this.load.image(item.name, item.file);
-        }
-    }
-
-    loadBackGrounds()
-    {
-        for (let i in itemsJson['background'].items) {
-            const item = itemsJson['background'].items[i];
-            this.load.image(item.name, item.file);
-        }
     }
 
     loadSounds()
