@@ -119,7 +119,7 @@
 				},
 				"item": {
 					"name": "background11",
-					"file": "public/assets/items/background/background11.png"
+					"color": "#F94144"
 				}
 			},
 			{
@@ -130,7 +130,7 @@
 				},
 				"item": {
 					"name": "background12",
-					"file": "public/assets/items/background/background12.png"
+					"color": "#F3722C"
 				}
 			},
 			{
@@ -141,7 +141,7 @@
 				},
 				"item": {
 					"name": "background13",
-					"file": "public/assets/items/background/background13.png"
+					"color": "#F8961E"
 				}
 			},
 			{
@@ -152,7 +152,7 @@
 				},
 				"item": {
 					"name": "background14",
-					"file": "public/assets/items/background/background14.png"
+					"color": "#F9844A"
 				}
 			},
 			{
@@ -163,7 +163,7 @@
 				},
 				"item": {
 					"name": "background15",
-					"file": "public/assets/items/background/background15.png"
+					"color": "#F9C74F"
 				}
 			},
 			{
@@ -174,7 +174,7 @@
 				},
 				"item": {
 					"name": "background16",
-					"file": "public/assets/items/background/background16.png"
+					"color": "#90BE6D"
 				}
 			},
 			{
@@ -185,7 +185,7 @@
 				},
 				"item": {
 					"name": "background17",
-					"file": "public/assets/items/background/background17.png"
+					"color": "#43AA8B"
 				}
 			},
 			{
@@ -196,7 +196,7 @@
 				},
 				"item": {
 					"name": "background18",
-					"file": "public/assets/items/background/background18.png"
+					"color": "#4D908E"
 				}
 			},
 			{
@@ -207,7 +207,7 @@
 				},
 				"item": {
 					"name": "background19",
-					"file": "public/assets/items/background/background19.png"
+					"color": "#577590"
 				}
 			},
 			{
@@ -219,7 +219,7 @@
 				"item":
 				{
 					"name": "background20",
-					"file": "public/assets/items/background/background20.png"
+					"color": "#277DA1"
 				}
 			}
 		]

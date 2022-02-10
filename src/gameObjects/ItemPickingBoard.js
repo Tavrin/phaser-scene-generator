@@ -63,10 +63,6 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
         this.itemSelector = itemSelector;
     }
 
-    hideBackgroundBoard() {
-        this.scene.add.sprite()
-    }
-
     addItems() {
         let posX, posY;
         let y = 0;
@@ -94,6 +90,10 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
                 this.hide();
             })
 
+            if (i >= 20) {
+                sprite.setVisible(false);
+            }
+
             this.items[y].push(sprite);
         }
 
@@ -118,10 +118,6 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
         if (this.items.length === 1) {
             this.nextItems.setVisible(false)
         }
-    }
-
-    hidePageItems() {
-
     }
 
     changePage(isPageForward = true) {

@@ -19,6 +19,8 @@ export default class RenderScreen extends Phaser.Scene
         for (let type in jsonData) {
             this.selectedItems[type] = [];
         }
+
+        this.selectedItems['backgroundColor'] = [];
     }
 
     preload()
@@ -27,6 +29,13 @@ export default class RenderScreen extends Phaser.Scene
             for (let i in jsonData[type].items) {
                 const item = jsonData[type].items[i];
                 if (!this.selectedItemsSelectors[type].includes(item['selector'].name)) {
+                    continue;
+                }
+
+                if (item.type && item.type === 'color') {
+                    console.log(item['item'].name);
+                    this.selectedItems['backgroundColor'].push(item['item'].color)
+
                     continue;
                 }
 
@@ -57,6 +66,10 @@ export default class RenderScreen extends Phaser.Scene
 
     setAudio(index = 0)
     {
+        if (0 === this.selectedItems['sound'].length) {
+            return;
+        }
+
         let sound = this.sound.add(this.selectedItems['sound'][index])
         sound.play();
         sound.on('complete', () => {
@@ -74,6 +87,34 @@ export default class RenderScreen extends Phaser.Scene
             image.displayHeight = this.cameras.main.height;
 
             this.backGrounds.push(image);
+        }
+
+        if (this.selectedItems['backgroundColor'].length > 0) {
+            this.selectedItems['backgroundColor'] = this.shuffleArray(this.selectedItems['backgroundColor']);
+            let colors = [];
+            let lastColor = null;
+            for (let i in this.selectedItems['backgroundColor']) {
+                if (i >= 4) {
+                    lastColor = this.selectedItems['backgroundColor'][i].replace('#', '0x');
+                    console.log(lastColor);
+                    continue;
+                }
+
+                colors.push(this.selectedItems['backgroundColor'][i].replace('#', '0x'))
+            }
+
+            let graphics = this.add.graphics();
+            graphics.fillGradientStyle(colors[0], colors[1] ?? colors[0],colors[2] ?? colors[1] ?? colors[0],colors[3] ?? colors[0]);
+            graphics.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
+
+            this.backGrounds.push(graphics);
+
+            if (lastColor) {
+                let graphics = this.add.graphics();
+                graphics.fillStyle(lastColor);
+                graphics.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
+                this.backGrounds.push(graphics);
+            }
         }
 
         if (this.backGrounds.length > 1) {
