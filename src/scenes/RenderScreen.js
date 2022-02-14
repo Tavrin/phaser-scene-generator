@@ -33,7 +33,6 @@ export default class RenderScreen extends Phaser.Scene
                 }
 
                 if (item.type && item.type === 'color') {
-                    console.log(item['item'].name);
                     this.selectedItems['backgroundColor'].push(item['item'].color)
 
                     continue;
@@ -70,13 +69,28 @@ export default class RenderScreen extends Phaser.Scene
             return;
         }
 
-        let sound = this.sound.add(this.selectedItems['sound'][index])
-        sound.play();
-        sound.on('complete', () => {
-            if (index < this.selectedItems['sound'].length - 1) {
-                this.setAudio(++index)
-            }
-        })
+        if (0 === index) {
+            let sound = this.sound.add('audioDebut')
+            sound.play();
+            sound.on('complete', () => {
+                sound = this.sound.add(this.selectedItems['sound'][index])
+                sound.play();
+                sound.on('complete', () => {
+                    if (index < this.selectedItems['sound'].length - 1) {
+                        this.setAudio(++index)
+                    }
+                })
+            })
+
+        } else {
+            let sound = this.sound.add(this.selectedItems['sound'][index])
+            sound.play();
+            sound.on('complete', () => {
+                if (index < this.selectedItems['sound'].length - 1) {
+                    this.setAudio(++index)
+                }
+            })
+        }
     }
 
     renderBackground()
@@ -96,7 +110,6 @@ export default class RenderScreen extends Phaser.Scene
             for (let i in this.selectedItems['backgroundColor']) {
                 if (i >= 4) {
                     lastColor = this.selectedItems['backgroundColor'][i].replace('#', '0x');
-                    console.log(lastColor);
                     continue;
                 }
 

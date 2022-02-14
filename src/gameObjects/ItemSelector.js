@@ -9,6 +9,7 @@ export default class ItemSelector extends Phaser.GameObjects.Sprite {
         this.y = y;
         this.image = image;
         this.type = type;
+        this.text = null;
         this.pickingBoard = pickingBoard;
         this.itemSprite = null;
         this.itemId = null;
@@ -24,10 +25,17 @@ export default class ItemSelector extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
     }
 
-    addItem(sprite, itemName)
-    {
+    addItem(sprite, itemName, text = null) {
         this.itemSprite = sprite;
         this.itemId = itemName;
-        this.setTexture(this.itemId);
+        if ('sound' === this.type) {
+            this.setTexture('itemZoneButton');
+            if (text) {
+                this.text = this.scene.add.bitmapText(this.x - 15, this.y - 20, 'averta', text, 10);
+                this.text.maxWidth = 50;
+            }
+        } else {
+            this.setTexture(this.itemId);
+        }
     }
 }

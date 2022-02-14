@@ -12,6 +12,7 @@ export default class TitleScreen extends Phaser.Scene
 
     preload()
     {
+        this.load.bitmapFont('avertaWhite', 'public/assets/font/averta2_0.png', 'public/assets/font/averta2.xml');
         this.load.image('bgc', 'public/assets/img/bgc-splash.jpg')
         this.load.image('startButton', 'public/assets/img/startButtonDarkText.png')
     }
@@ -23,7 +24,7 @@ export default class TitleScreen extends Phaser.Scene
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
         let startButton = this.add.sprite(centerWidth, centerHeight + 100, 'startButton').setInteractive();
-        this.add.text(screenCenterX / 1.7, centerHeight - 100, "GENERATEUR D'IMAGES", {fontFamily: 'font1, sans-serif', fontSize: '4rem', fill: '#fff', align: 'center' });
+        let text = this.add.bitmapText(screenCenterX / 1.7, centerHeight - 100, 'avertaWhite', "GENERATEUR D'HISTOIRES", 72);
 
         startButton.on('pointerdown', () => {
             this.cameras.main.fadeOut(200, 0, 0, 0);

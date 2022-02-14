@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import ItemSelector from "../gameObjects/ItemSelector";
 import ItemPickingBoard from "../gameObjects/ItemPickingBoard";
-const itemsJson= require('../items.json');
+let itemsJson= require('../items.json');
 
 const centerWidth = window.innerWidth / 2;
 const centerHeight = window.innerHeight / 2;
@@ -30,17 +30,27 @@ const PICK_BOARDS = [
             this.types.push(type);
 
             for (let i in itemsJson[type].items) {
+                if (type === 'sound') {
+                    let text = decodeURIComponent(escape(itemsJson[type].items[i]['selector'].text));
+                    let soundData = {
+                        'selector': itemsJson[type].items[i]['selector'].name,
+                        'text': text
+                    };
+                    this.itemsNamesList[type].push(soundData);
+                    continue;
+                }
+
                 this.itemsNamesList[type].push(itemsJson[type].items[i]['selector'].name);
             }
         }
-
-        console.log(this.itemsNamesList);
     }
 
     preload()
     {
+        this.load.bitmapFont('averta', 'public/assets/font/averta_0.png', 'public/assets/font/averta.xml');
         this.load.image('bgc2', 'public/assets/img/backgroundv2.jpg');
         this.load.image('addItemButton', 'public/assets/img/buttonAjout.png');
+        this.load.image('itemZoneButton', 'public/assets/img/itemZone.png');
         this.load.image('generateButton', 'public/assets/img/generate.png');
         this.load.image('labelSon', 'public/assets/img/label-sons.png');
         this.load.image('labelBackground', 'public/assets/img/label-background.png');
@@ -54,6 +64,7 @@ const PICK_BOARDS = [
         this.load.image(PICK_BOARDS[2], 'public/assets/img/pickboard-front.png');
         this.load.image(PICK_BOARDS[3], 'public/assets/img/pickboard-sound.png');
         this.load.image('back', 'public/assets/img/retour.png');
+        this.load.audio('audioDebut', 'public/assets/items/sound/sound1.wav');
 
         this.loadItems();
     }
@@ -65,7 +76,6 @@ const PICK_BOARDS = [
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
         this.add.image(centerWidth, centerHeight, 'bgc2');
-
         let filter = this.add.image(centerWidth, centerHeight, 'blackFilter').setInteractive();
         filter.alpha = 0.9;
         filter.visible = false;
@@ -173,6 +183,10 @@ const PICK_BOARDS = [
     {
         for (let y in this.types) {
             for (let i in itemsJson[this.types[y]].items) {
+                if (y === 'sound') {
+                    continue;
+                }
+
                 const item = itemsJson[this.types[y]].items[i];
                 this.load.image(item['selector'].name, item['selector'].file);
             }

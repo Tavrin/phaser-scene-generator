@@ -636,18 +636,9 @@
 		"items": [
 			{
 				"selector": {
-					"name": "sound1Selector",
-					"file": "public/assets/items/sound/selectors/sound1.png"
-				},
-				"item": {
-					"name": "sound1",
-					"file": "public/assets/items/sound/sound1.wav"
-				}
-			},
-			{
-				"selector": {
 					"name": "sound2Selector",
-					"file": "public/assets/items/sound/selectors/sound2.png"
+					"file": "public/assets/items/sound/selectors/sound2.png",
+					"text": "A la plage"
 				},
 				"item": {
 					"name": "sound2",
@@ -657,7 +648,8 @@
 			{
 				"selector": {
 					"name": "sound3Selector",
-					"file": "public/assets/items/sound/selectors/sound3.png"
+					"file": "public/assets/items/sound/selectors/sound3.png",
+					"text": "En ville"
 				},
 				"item": {
 					"name": "sound3",
@@ -667,7 +659,8 @@
 			{
 				"selector": {
 					"name": "sound4Selector",
-					"file": "public/assets/items/sound/selectors/sound4.png"
+					"file": "public/assets/items/sound/selectors/sound4.png",
+					"text": "A la montagne"
 				},
 				"item": {
 					"name": "sound4",
@@ -677,7 +670,8 @@
 			{
 				"selector": {
 					"name": "sound5Selector",
-					"file": "public/assets/items/sound/selectors/sound5.png"
+					"file": "public/assets/items/sound/selectors/sound5.png",
+					"text": "A la campagne"
 				},
 				"item": {
 					"name": "sound5",
@@ -687,7 +681,8 @@
 			{
 				"selector": {
 					"name": "sound6Selector",
-					"file": "public/assets/items/sound/selectors/sound6.png"
+					"file": "public/assets/items/sound/selectors/sound6.png",
+					"text": "Pendant une matinée"
 				},
 				"item": {
 					"name": "sound6",
@@ -697,7 +692,8 @@
 			{
 				"selector": {
 					"name": "sound7Selector",
-					"file": "public/assets/items/sound/selectors/sound7.png"
+					"file": "public/assets/items/sound/selectors/sound7.png",
+					"text": "Pendant une journée"
 				},
 				"item": {
 					"name": "sound7",
@@ -707,7 +703,8 @@
 			{
 				"selector": {
 					"name": "sound8Selector",
-					"file": "public/assets/items/sound/selectors/sound8.png"
+					"file": "public/assets/items/sound/selectors/sound8.png",
+					"text": "Pendant une soirée"
 				},
 				"item": {
 					"name": "sound8",
@@ -717,7 +714,8 @@
 			{
 				"selector": {
 					"name": "sound9Selector",
-					"file": "public/assets/items/sound/selectors/sound9.png"
+					"file": "public/assets/items/sound/selectors/sound9.png",
+					"text": "Ensoleillée"
 				},
 				"item": {
 					"name": "sound9",
@@ -727,7 +725,8 @@
 			{
 				"selector": {
 					"name": "sound10Selector",
-					"file": "public/assets/items/sound/selectors/sound10.png"
+					"file": "public/assets/items/sound/selectors/sound10.png",
+					"text": "Grisâtre"
 				},
 				"item": {
 					"name": "sound10",
@@ -737,7 +736,8 @@
 			{
 				"selector": {
 					"name": "sound11Selector",
-					"file": "public/assets/items/sound/selectors/sound11.png"
+					"file": "public/assets/items/sound/selectors/sound11.png",
+					"text": "Pluvieuse"
 				},
 				"item": {
 					"name": "sound11",
@@ -747,7 +747,8 @@
 			{
 				"selector": {
 					"name": "sound12Selector",
-					"file": "public/assets/items/sound/selectors/sound12.png"
+					"file": "public/assets/items/sound/selectors/sound12.png",
+					"text": "Orageuse"
 				},
 				"item": {
 					"name": "sound12",
@@ -757,7 +758,8 @@
 			{
 				"selector": {
 					"name": "sound13Selector",
-					"file": "public/assets/items/sound/selectors/sound13.png"
+					"file": "public/assets/items/sound/selectors/sound13.png",
+					"text": "En été"
 				},
 				"item": {
 					"name": "sound13",
@@ -767,7 +769,8 @@
 			{
 				"selector": {
 					"name": "sound14Selector",
-					"file": "public/assets/items/sound/selectors/sound14.png"
+					"file": "public/assets/items/sound/selectors/sound14.png",
+					"text": "En automne"
 				},
 				"item": {
 					"name": "sound14",
@@ -777,7 +780,8 @@
 			{
 				"selector": {
 					"name": "sound15Selector",
-					"file": "public/assets/items/sound/selectors/sound15.png"
+					"file": "public/assets/items/sound/selectors/sound15.png",
+					"text": "En hiver"
 				},
 				"item": {
 					"name": "sound15",
@@ -787,7 +791,8 @@
 			{
 				"selector": {
 					"name": "sound16Selector",
-					"file": "public/assets/items/sound/selectors/sound16.png"
+					"file": "public/assets/items/sound/selectors/sound16.png",
+					"text": "Au printemps"
 				},
 				"item": {
 					"name": "sound16",
@@ -797,7 +802,8 @@
 			{
 				"selector": {
 					"name": "sound17Selector",
-					"file": "public/assets/items/sound/selectors/sound17.png"
+					"file": "public/assets/items/sound/selectors/sound17.png",
+					"text": "Une fête qui s'organisait"
 				},
 				"item": {
 					"name": "sound17",
@@ -807,7 +813,8 @@
 			{
 				"selector": {
 					"name": "sound18Selector",
-					"file": "public/assets/items/sound/selectors/sound18.png"
+					"file": "public/assets/items/sound/selectors/sound18.png",
+					"text": "Un grand repas s'organisait"
 				},
 				"item": {
 					"name": "sound18",
@@ -817,7 +824,8 @@
 			{
 				"selector": {
 					"name": "sound19Selector",
-					"file": "public/assets/items/sound/selectors/sound19.png"
+					"file": "public/assets/items/sound/selectors/sound19.png",
+					"text": "Une chasse au trésor était en cours"
 				},
 				"item": {
 					"name": "sound19",
@@ -827,7 +835,8 @@
 			{
 				"selector": {
 					"name": "sound20Selector",
-					"file": "public/assets/items/sound/selectors/sound20.png"
+					"file": "public/assets/items/sound/selectors/sound20.png",
+					"text": "Tout le monde travaillait dur"
 				},
 				"item": {
 					"name": "sound20",
@@ -837,7 +846,8 @@
 			{
 				"selector": {
 					"name": "sound21Selector",
-					"file": "public/assets/items/sound/selectors/sound21.png"
+					"file": "public/assets/items/sound/selectors/sound21.png",
+					"text": "Une fête qui s'organisait"
 				},
 				"item": {
 					"name": "sound21",
@@ -847,7 +857,8 @@
 			{
 				"selector": {
 					"name": "sound22Selector",
-					"file": "public/assets/items/sound/selectors/sound22.png"
+					"file": "public/assets/items/sound/selectors/sound22.png",
+					"text": "Un grand repas s'organisait"
 				},
 				"item": {
 					"name": "sound22",
@@ -857,7 +868,8 @@
 			{
 				"selector": {
 					"name": "sound23Selector",
-					"file": "public/assets/items/sound/selectors/sound23.png"
+					"file": "public/assets/items/sound/selectors/sound23.png",
+					"text": "Une chasse au trésor était en cours"
 				},
 				"item": {
 					"name": "sound23",
@@ -867,7 +879,8 @@
 			{
 				"selector": {
 					"name": "sound24Selector",
-					"file": "public/assets/items/sound/selectors/sound24.png"
+					"file": "public/assets/items/sound/selectors/sound24.png",
+					"text": "Tout le monde travaillait dur"
 				},
 				"item": {
 					"name": "sound24",

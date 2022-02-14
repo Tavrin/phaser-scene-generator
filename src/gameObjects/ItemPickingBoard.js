@@ -28,6 +28,7 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
         this.itemsNames = itemsNames;
         this.itemSelector = null;
         this.items = [];
+        this.text = [];
         this.type = type;
         this.x = x;
         this.y = y;
@@ -74,6 +75,7 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
                 }
 
                 this.items[y] = [];
+                this.text[y] = [];
                 posX = -230;
                 posY = -145;
             } else if (0 === (i) % 5) {
@@ -82,16 +84,30 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
             } else {
                 posX += 115;
             }
+            let sprite, text;
 
-            let sprite = new Phaser.GameObjects.Sprite(this.scene, posX, posY, this.itemsNames[i]);
+            if ( 'sound' === this.type) {
+                sprite = new Phaser.GameObjects.Sprite(this.scene, posX, posY, 'itemZoneButton');
+                text = new Phaser.GameObjects.BitmapText(this.scene, posX - 35, posY - 35, 'averta', this.itemsNames[i]['text'].substring(0, 50), 14);
+                text.setDepth(8);
+                text.maxWidth = 70;
+                this.text[y].push(text);
+                this.bringToTop(text);
+            } else {
+                sprite = new Phaser.GameObjects.Sprite(this.scene, posX, posY, this.itemsNames[i]);
+            }
+
             sprite.setInteractive();
             sprite.on('pointerdown',() => {
-                this.itemSelector.addItem(sprite, this.itemsNames[i]);
+                'sound' === this.type ? this.itemSelector.addItem(sprite, this.itemsNames[i]['selector'], this.itemsNames[i]['text'].substring(0, 50)) : this.itemSelector.addItem(sprite, this.itemsNames[i]);
                 this.hide();
             })
 
             if (i >= 20) {
                 sprite.setVisible(false);
+                if ('sound' === this.type) {
+                    text.setVisible(false)
+                }
             }
 
             this.items[y].push(sprite);
@@ -99,6 +115,12 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
 
         for (let i = 0; i < this.items.length; i++) {
             this.add(this.items[i]);
+        }
+
+        if ('sound' === this.type) {
+            for (let i = 0; i < this.text.length; i++) {
+                this.add(this.text[i]);
+            }
         }
 
         this.bringToTop(this.backImage);
@@ -123,6 +145,9 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
     changePage(isPageForward = true) {
         for (let i = 0; i <this.items[this.currentPageIndex].length; i++) {
             this.items[this.currentPageIndex][i].setVisible(false);
+            if ('sound' === this.type) {
+                this.text[this.currentPageIndex][i].setVisible(false);
+            }
         }
 
         isPageForward ? this.currentPageIndex ++ : this.currentPageIndex --;
@@ -131,6 +156,10 @@ export default class ItemPickingBoard extends Phaser.GameObjects.Container {
 
         for (let i = 0; i <this.items[this.currentPageIndex].length; i++) {
             this.items[this.currentPageIndex][i].setVisible(true);
+
+            if ('sound' === this.type) {
+                this.text[this.currentPageIndex][i].setVisible(true);
+            }
         }
     }
 }
