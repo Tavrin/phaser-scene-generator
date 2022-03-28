@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "phaser": "^3.55.2"
+    "html5-qrcode": "^2.2.0",
+    "phaser": "^3.55.2",
+    "qr-scanner": "^1.4.1"
   },
   "devDependencies": {
     "webpack": "^5.66.0",

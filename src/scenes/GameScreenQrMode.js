@@ -3,6 +3,7 @@ import ItemSelector from "../gameObjects/ItemSelector";
 import ItemPickingBoard from "../gameObjects/ItemPickingBoard";
 import QrScanner from 'qr-scanner';
 import {Html5QrcodeScanner} from "html5-qrcode";
+import ItemSelectorQrMode from "../gameObjects/ItemSelectorQrMode";
 let itemsJson = require('../items.json');
 
 const centerWidth = window.innerWidth / 2;
@@ -14,11 +15,11 @@ const PICK_BOARDS = [
     'boardImageSound',
 ]
 
-    export default class GameScreen extends Phaser.Scene
+    export default class GameScreenQrMode extends Phaser.Scene
 {
     constructor()
     {
-        super('GameScreen')
+        super('GameScreenQrMode')
         this.selectors = [];
         this.types = [];
         this.itemsNamesList = {};
@@ -89,9 +90,45 @@ const PICK_BOARDS = [
         this.add.sprite(screenCenterX / 2.2, 160, 'labelBackground');
 
         this.setGenerateButton(screenCenterX);
-
-        this.setPickingBoard(screenCenterX, screenCenterY, filter, 'back');
         this.setBoard(screenCenterX);
+
+        let video = this.add.video(1600, 400, 'testvideo');
+        this.startup(video);
+    }
+
+    startup(video) {
+        navigator.mediaDevices.getUserMedia({video: true, audio: false})
+            .then((stream) => {
+                video.loadMediaStream(stream, 'canplay');
+                video.scale = 0.5;
+                video.play();
+                console.log(video.video);
+
+                const scanner = new QrScanner(video.video, (result) => {this.addQrCodeId(result)}, {
+                    onDecodeError: error => {
+                       console.log(error);
+                    },
+                    highlightScanRegion: true,
+                    highlightCodeOutline: true,
+                });
+
+                video.video.width = 400;
+                video.video.height = 400;
+
+                scanner.start().then(r => console.log(r));
+            })
+            .catch(function(err) {
+                console.log("An error occurred: " + err);
+            });
+    }
+
+    addQrCodeId(result) {
+        if (this.qrCodeIds.includes(result.data)) {
+            return null;
+        }
+
+        this.qrCodeIds.push(result.data)
+        console.log(this.qrCodeIds);
     }
 
     setGenerateButton(screenCenterX)
@@ -116,28 +153,6 @@ const PICK_BOARDS = [
         })
     }
 
-    setPickingBoard(screenCenterX, screenCenterY, filter, backImage)
-    {
-        for (let i = 0; i < this.types.length; i++) {
-            for (let y = 0; 'sound' === this.types[i] ? y < 20 : y < 5; y++) {
-                let pickingBoard = new ItemPickingBoard({
-                    scene: this,
-                    type: this.types[i],
-                    x: screenCenterX,
-                    y: screenCenterY / 1.3,
-                    board: PICK_BOARDS[i],
-                    filter: filter,
-                    back: backImage,
-                    itemsNames: this.itemsNamesList[this.types[i]],
-                    next: 'nextItemsPage',
-                    previous: 'previousItemsPage',
-                })
-
-                this.pickingBoards.push(pickingBoard);
-            }
-        }
-    }
-
     setBoard(screenCenterX)
     {
         let currentItemX = screenCenterX / 1.5;
@@ -146,13 +161,12 @@ const PICK_BOARDS = [
         let soundIndex = 0;
 
         for (let i = 0; i < 35 ; i++) {
-            let itemSelector = new ItemSelector({
+            let itemSelector = new ItemSelectorQrMode({
                 scene : this,
                 x: currentItemX,
                 y: currentItemY,
                 image : 'addItemButton',
                 type : this.types[currentTypeIndex],
-                pickingBoard : this.pickingBoards[i],
             })
 
             if (i < 15) {
