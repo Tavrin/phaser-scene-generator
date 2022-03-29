@@ -9,6 +9,7 @@ export default class ItemSelectorQrMode extends Phaser.GameObjects.Sprite {
         this.y = y;
         this.image = image;
         this.type = type;
+        this.qrId = 0;
         this.text = null;
         this.itemSprite = null;
         this.itemId = null;
@@ -18,8 +19,7 @@ export default class ItemSelectorQrMode extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
     }
 
-    addItem(sprite, itemName, text = null) {
-        this.itemSprite = sprite;
+    addItem(itemName, text = null) {
         this.itemId = itemName;
         if ('sound' === this.type) {
             this.setTexture('itemZoneButton');
@@ -28,7 +28,13 @@ export default class ItemSelectorQrMode extends Phaser.GameObjects.Sprite {
                 this.text.maxWidth = 50;
             }
         } else {
+            console.log(this.itemId);
             this.setTexture(this.itemId);
         }
+    }
+
+    addQrImage(qrName) {
+        this.qrId = qrName;
+        this.setTexture(this.qrId);
     }
 }

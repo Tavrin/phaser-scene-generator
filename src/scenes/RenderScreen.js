@@ -12,6 +12,8 @@ export default class RenderScreen extends Phaser.Scene
         this.screenCenterX = null;
         this.screenCenterY = null;
         this.maxTries = 5000;
+        this.escapeKey = null;
+        this.aKey = null;
     }
 
     init(data) {
@@ -40,6 +42,14 @@ export default class RenderScreen extends Phaser.Scene
 
                 if (type === 'sound') {
                     this.load.audio(item['item'].name, item['item'].file);
+                    let soundData = {
+                        'item': item['item'].name,
+                        'text' : decodeURIComponent(escape(item['selector'].text))
+                    };
+
+                    this.selectedItems[type].push(soundData);
+
+                    continue;
                 } else {
                     this.load.image(item['item'].name, item['item'].file);
                 }
@@ -53,7 +63,8 @@ export default class RenderScreen extends Phaser.Scene
     {
         this.screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
-
+        this.escapeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+        this.aKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.cameras.main.fadeIn(400, 0, 0, 0);
         this.cameras.main.setBackgroundColor("#fff");
 
@@ -61,6 +72,18 @@ export default class RenderScreen extends Phaser.Scene
         this.renderSprites('back', 560);
         this.renderSprites('front', 800);
         this.setAudio();
+    }
+
+    update(time, delta) {
+        super.update(time, delta);
+
+        if (this.escapeKey.isDown) {
+            this.reset();
+        }
+
+        if (this.aKey.isDown) {
+            this.resetQr();
+        }
     }
 
     setAudio(index = 0)
@@ -73,9 +96,11 @@ export default class RenderScreen extends Phaser.Scene
             let sound = this.sound.add('audioDebut')
             sound.play();
             sound.on('complete', () => {
-                sound = this.sound.add(this.selectedItems['sound'][index])
+                sound = this.sound.add(this.selectedItems['sound'][index].item)
+                let text = this.add.bitmapText(this.screenCenterX / 1.7, this.screenCenterY - 100, 'averta', this.selectedItems['sound'][index].text, 72);
                 sound.play();
                 sound.on('complete', () => {
+                    text.destroy();
                     if (index < this.selectedItems['sound'].length - 1) {
                         this.setAudio(++index)
                     }
@@ -83,9 +108,11 @@ export default class RenderScreen extends Phaser.Scene
             })
 
         } else {
-            let sound = this.sound.add(this.selectedItems['sound'][index])
+            let text = this.add.bitmapText(this.screenCenterX / 1.7, this.screenCenterY - 100, 'averta', this.selectedItems['sound'][index].text, 72);
+            let sound = this.sound.add(this.selectedItems['sound'][index].item)
             sound.play();
             sound.on('complete', () => {
+                text.destroy();
                 if (index < this.selectedItems['sound'].length - 1) {
                     this.setAudio(++index)
                 }
@@ -249,5 +276,19 @@ export default class RenderScreen extends Phaser.Scene
         }
 
         return array;
+    }
+
+    reset() {
+        this.cameras.main.fadeOut(200, 0, 0, 0);
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+            this.scene.start('GameScreen');
+        })
+    }
+
+    resetQr() {
+        this.cameras.main.fadeOut(200, 0, 0, 0);
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+            this.scene.start('GameScreenQrMode');
+        })
     }
 }

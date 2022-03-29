@@ -1,10 +1,10 @@
 import Phaser from 'phaser'
-import ItemSelector from "../gameObjects/ItemSelector";
-import ItemPickingBoard from "../gameObjects/ItemPickingBoard";
 import QrScanner from 'qr-scanner';
-import {Html5QrcodeScanner} from "html5-qrcode";
 import ItemSelectorQrMode from "../gameObjects/ItemSelectorQrMode";
+
 let itemsJson = require('../items.json');
+
+const TOTAL_BOARD_ITEMS = 35;
 
 const centerWidth = window.innerWidth / 2;
 const centerHeight = window.innerHeight / 2;
@@ -20,6 +20,8 @@ const PICK_BOARDS = [
     constructor()
     {
         super('GameScreenQrMode')
+        this.spaceKey = null;
+        this.eKey = null;
         this.selectors = [];
         this.types = [];
         this.itemsNamesList = {};
@@ -88,6 +90,8 @@ const PICK_BOARDS = [
         this.add.sprite(screenCenterX / 2.2, 460, 'labelFront');
         this.add.sprite(screenCenterX / 2.2, 310, 'labelBack');
         this.add.sprite(screenCenterX / 2.2, 160, 'labelBackground');
+        this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
         this.setGenerateButton(screenCenterX);
         this.setBoard(screenCenterX);
@@ -96,24 +100,67 @@ const PICK_BOARDS = [
         this.startup(video);
     }
 
+    update(time, delta) {
+        super.update(time, delta);
+
+        if (this.spaceKey.isDown) {
+            this.generate();
+        }
+    }
+
     startup(video) {
         navigator.mediaDevices.getUserMedia({video: true, audio: false})
             .then((stream) => {
                 video.loadMediaStream(stream, 'canplay');
                 video.scale = 0.5;
                 video.play();
+
+                this.input.keyboard.on('keydown-E', (event) => {
+                    let cropX = 0;
+                    let cropY = 0;
+
+                    for (let i = 0; i < TOTAL_BOARD_ITEMS; i++) {
+                        let snapshot = video.snapshotArea(cropX,cropY, 120, 120);
+
+                        if (this.textures.get('snapshot'+i).key === 'snapshot'+i) {
+                            let canvas = this.textures.get('snapshot'+i);
+                            canvas.source = snapshot;
+                        } else {
+                            this.textures.addCanvas('snapshot'+i, snapshot.canvas);
+                        }
+
+                        this.selectors[i].addQrImage('snapshot'+i);
+                        console.log(this.textures.get('snapshot'+i));
+
+
+
+                        //let snapshot = this.add.image(500, 300, 'snapshot'+i);
+
+                        console.log(this.selectors[i].qrId);
+                        console.log(snapshot);
+                        let sourceImage = snapshot.getSourceImage();
+                            QrScanner.scanImage(sourceImage, {
+                                returnDetailedScanResult : true,
+                            })
+                                .then(result => console.log(result.data + ' - ' + i))
+                                .catch(error => console.log(error || 'No QR code found.'));
+
+
+
+
+                        cropX += 120;
+                    }
+                });
+
                 console.log(video.video);
 
                 const scanner = new QrScanner(video.video, (result) => {this.addQrCodeId(result)}, {
-                    onDecodeError: error => {
-                       console.log(error);
-                    },
                     highlightScanRegion: true,
                     highlightCodeOutline: true,
                 });
 
-                video.video.width = 400;
-                video.video.height = 400;
+                video.video.width =800;
+                video.video.height = 800;
 
                 scanner.start().then(r => console.log(r));
             })
@@ -123,11 +170,40 @@ const PICK_BOARDS = [
     }
 
     addQrCodeId(result) {
+        return null;
+
         if (this.qrCodeIds.includes(result.data)) {
             return null;
         }
 
-        this.qrCodeIds.push(result.data)
+
+        for (let y in this.types) {
+            firstLoop:
+            for (let i in itemsJson[this.types[y]].items) {
+                const item = itemsJson[this.types[y]].items[i];
+
+                if (!item['item'].name || result.data !== item['item'].name) {
+                    continue;
+                }
+
+                console.log(this.selectors);
+
+                for (let u in this.selectors) {
+                    if (null !== this.selectors[u].itemId || this.selectors[i].type !== this.types[y]) {
+                        continue;
+                    }
+
+                    let selector = item['selector'].name;
+                    console.log(selector);
+                    this.qrCodeIds.push(result.data);
+                    this.selectors[i].addItem(selector);
+                    console.log(this.selectors[i]);
+
+                    break firstLoop;
+                }
+            }
+        }
+
         console.log(this.qrCodeIds);
     }
 
@@ -136,20 +212,24 @@ const PICK_BOARDS = [
         let button = this.add.sprite(screenCenterX, 800, 'generateButton');
         button.setInteractive();
         button.on('pointerdown', () => {
-            for (let i in this.selectors) {
-                if (null === this.selectors[i].itemId) {
-                    continue;
-                }
+            this.generate();
+        })
+    }
 
-                if (this.selectors[i].type in this.selectedItems) {
-                    this.selectedItems[this.selectors[i].type].push(this.selectors[i].itemId);
-                }
+    generate() {
+        for (let i in this.selectors) {
+            if (null === this.selectors[i].itemId) {
+                continue;
             }
 
-            this.cameras.main.fadeOut(200, 0, 0, 0);
-            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-                this.scene.start('RenderScreen', {selectedItems: this.selectedItems});
-            })
+            if (this.selectors[i].type in this.selectedItems) {
+                this.selectedItems[this.selectors[i].type].push(this.selectors[i].itemId);
+            }
+        }
+
+        this.cameras.main.fadeOut(200, 0, 0, 0);
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+            this.scene.start('RenderScreen', {selectedItems: this.selectedItems});
         })
     }
 
@@ -160,7 +240,7 @@ const PICK_BOARDS = [
         let currentTypeIndex = 0;
         let soundIndex = 0;
 
-        for (let i = 0; i < 35 ; i++) {
+        for (let i = 0; i < TOTAL_BOARD_ITEMS ; i++) {
             let itemSelector = new ItemSelectorQrMode({
                 scene : this,
                 x: currentItemX,
