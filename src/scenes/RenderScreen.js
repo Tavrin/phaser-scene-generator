@@ -1,4 +1,6 @@
 import Phaser from 'phaser'
+import GameScreenQrMode from "./GameScreenQrMode";
+import GameScreen from "./GameScreen";
 const jsonData= require('../items.json');
 const MINIMAL_DISTANCE = 250;
 
@@ -6,6 +8,7 @@ export default class RenderScreen extends Phaser.Scene
 {
     constructor() {
         super('RenderScreen');
+        this.previousIndex = 0;
         this.isResetting = false;
         this.selectedItemsSelectors = null;
         this.selectedItems = [];
@@ -20,6 +23,7 @@ export default class RenderScreen extends Phaser.Scene
     init(data) {
         this.selectedItemsSelectors = data.selectedItems;
         this.previousScene = data.scene;
+        this.previousIndex += 1;
         for (let type in jsonData) {
             this.selectedItems[type] = [];
         }
@@ -72,7 +76,6 @@ export default class RenderScreen extends Phaser.Scene
         this.escapeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
         this.cameras.main.fadeIn(400, 0, 0, 0);
         this.cameras.main.setBackgroundColor("#fff");
-        this.scene.remove(this.previousScene);
         this.renderBackground();
         this.renderSprites('back', 560);
         this.renderSprites('front', 800);
@@ -267,10 +270,21 @@ export default class RenderScreen extends Phaser.Scene
     }
 
     reset() {
+        console.log('test');
         this.cameras.main.fadeOut(200, 0, 0, 0);
         this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-            console.log(this.previousScene);
-            this.scene.add(this.previousScene, {}, true)
+            this.scene.restart();
+            this.scene.remove(this.previousScene);
+            this.isResetting = false;
+            let key = this.previousScene + this.previousIndex;
+            let spawned = null;
+
+           if ('GameScreen' === this.previousScene) {
+               spawned = new GameScreen(key);
+           } else {
+               spawned = new GameScreenQrMode(key);
+           }
+           this.scene.add(key, spawned, true);
         })
     }
 }

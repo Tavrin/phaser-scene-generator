@@ -16,9 +16,9 @@ const PICK_BOARDS = [
 
     export default class GameScreen extends Phaser.Scene
 {
-    constructor()
+    constructor(handle = 'GameScreen')
     {
-        super('GameScreen')
+        super(handle)
         this.spaceKey = null;
         this.isGenerating = false;
         this.selectors = [];
