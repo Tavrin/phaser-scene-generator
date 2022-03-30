@@ -1,7 +1,6 @@
 import Phaser from 'phaser'
 import QrScanner from 'qr-scanner';
 import ItemSelectorQrMode from "../gameObjects/ItemSelectorQrMode";
-import * as _ from 'lodash';
 
 let itemsJson = require('../items.json');
 

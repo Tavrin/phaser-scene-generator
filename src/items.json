@@ -5,7 +5,8 @@
 				"type": "image",
 				"selector": {
 					"name": "background1Selector",
-					"file": "public/assets/items/background/selectors/background1.png"
+					"file": "public/assets/items/background/selectors/background1.png",
+					"text": "pendant la récréation"
 				},
 				"item": {
 					"name": "background1",
@@ -16,7 +17,8 @@
 				"type": "image",
 				"selector": {
 					"name": "background2Selector",
-					"file": "public/assets/items/background/selectors/background2.png"
+					"file": "public/assets/items/background/selectors/background2.png",
+					"text": "faisons des grillades"
 				},
 				"item": {
 					"name": "background2",
@@ -27,7 +29,8 @@
 				"type": "image",
 				"selector": {
 					"name": "background3Selector",
-					"file": "public/assets/items/background/selectors/background3.png"
+					"file": "public/assets/items/background/selectors/background3.png",
+					"text": "faisons des grillades"
 				},
 				"item": {
 					"name": "background3",
@@ -38,7 +41,8 @@
 				"type": "image",
 				"selector": {
 					"name": "background4Selector",
-					"file": "public/assets/items/background/selectors/background4.png"
+					"file": "public/assets/items/background/selectors/background4.png",
+					"text": "faisons des grillades"
 				},
 				"item": {
 					"name": "background4",
@@ -49,7 +53,8 @@
 				"type": "image",
 				"selector": {
 					"name": "background5Selector",
-					"file": "public/assets/items/background/selectors/background5.png"
+					"file": "public/assets/items/background/selectors/background5.png",
+					"text": "faisons des grillades"
 				},
 				"item": {
 					"name": "background5",
@@ -60,7 +65,8 @@
 				"type": "image",
 				"selector": {
 					"name": "background6Selector",
-					"file": "public/assets/items/background/selectors/background6.png"
+					"file": "public/assets/items/background/selectors/background6.png",
+					"text": "faisons des grillades"
 				},
 				"item": {
 					"name": "background6",
@@ -71,7 +77,8 @@
 				"type": "image",
 				"selector": {
 					"name": "background7Selector",
-					"file": "public/assets/items/background/selectors/background7.png"
+					"file": "public/assets/items/background/selectors/background7.png",
+					"text": "faisons des grillades"
 				},
 				"item": {
 					"name": "background7",
@@ -82,7 +89,8 @@
 				"type": "image",
 				"selector": {
 					"name": "background8Selector",
-					"file": "public/assets/items/background/selectors/background8.png"
+					"file": "public/assets/items/background/selectors/background8.png",
+					"text": "faisons des grillades"
 				},
 				"item": {
 					"name": "background8",
@@ -93,7 +101,8 @@
 				"type": "image",
 				"selector": {
 					"name": "background9Selector",
-					"file": "public/assets/items/background/selectors/background9.png"
+					"file": "public/assets/items/background/selectors/background9.png",
+					"text": "faisons des grillades"
 				},
 				"item": {
 					"name": "background9",
@@ -104,7 +113,8 @@
 				"type": "image",
 				"selector": {
 					"name": "background10Selector",
-					"file": "public/assets/items/background/selectors/background10.png"
+					"file": "public/assets/items/background/selectors/background10.png",
+					"text": "faisons des grillades"
 				},
 				"item": {
 					"name": "background10",
@@ -229,7 +239,8 @@
 			{
 				"selector": {
 					"name": "back1Selector",
-					"file": "public/assets/items/back/selectors/back1.png"
+					"file": "public/assets/items/back/selectors/back1.png",
+					"text": "pendant les vacances"
 				},
 				"item": {
 					"name": "back1",
@@ -239,7 +250,8 @@
 			{
 				"selector": {
 					"name": "back2Selector",
-					"file": "public/assets/items/back/selectors/back2.png"
+					"file": "public/assets/items/back/selectors/back2.png",
+					"text": "faisons des grillades"
 				},
 				"item": {
 					"name": "back2",
@@ -249,7 +261,8 @@
 			{
 				"selector": {
 					"name": "back3Selector",
-					"file": "public/assets/items/back/selectors/back3.png"
+					"file": "public/assets/items/back/selectors/back3.png",
+					"text": "peuplons les forêts"
 				},
 				"item": {
 					"name": "back3",
@@ -259,7 +272,8 @@
 			{
 				"selector": {
 					"name": "back4Selector",
-					"file": "public/assets/items/back/selectors/back4.png"
+					"file": "public/assets/items/back/selectors/back4.png",
+					"text": "on entand un cri non ?"
 				},
 				"item": {
 					"name": "back4",
@@ -269,7 +283,8 @@
 			{
 				"selector": {
 					"name": "back5Selector",
-					"file": "public/assets/items/back/selectors/back5.png"
+					"file": "public/assets/items/back/selectors/back5.png",
+					"text": "ça doit être par ici"
 				},
 				"item": {
 					"name": "back5",
@@ -279,7 +294,8 @@
 			{
 				"selector": {
 					"name": "back6Selector",
-					"file": "public/assets/items/back/selectors/back6.png"
+					"file": "public/assets/items/back/selectors/back6.png",
+					"text": "la voiture hésitait"
 				},
 				"item": {
 					"name": "back6",
@@ -289,7 +305,8 @@
 			{
 				"selector": {
 					"name": "back7Selector",
-					"file": "public/assets/items/back/selectors/back7.png"
+					"file": "public/assets/items/back/selectors/back7.png",
+					"text": "les gouttes tombent"
 				},
 				"item": {
 					"name": "back7",
@@ -299,7 +316,8 @@
 			{
 				"selector": {
 					"name": "back8Selector",
-					"file": "public/assets/items/back/selectors/back8.png"
+					"file": "public/assets/items/back/selectors/back8.png",
+					"text": "il faisait violet"
 				},
 				"item": {
 					"name": "back8",
@@ -309,7 +327,8 @@
 			{
 				"selector": {
 					"name": "back9Selector",
-					"file": "public/assets/items/back/selectors/back9.png"
+					"file": "public/assets/items/back/selectors/back9.png",
+					"text": "c'était trop court comme ballade"
 				},
 				"item": {
 					"name": "back9",
@@ -319,7 +338,8 @@
 			{
 				"selector": {
 					"name": "back10Selector",
-					"file": "public/assets/items/back/selectors/back10.png"
+					"file": "public/assets/items/back/selectors/back10.png",
+					"text": "face aux rochers"
 				},
 				"item": {
 					"name": "back10",
@@ -329,7 +349,8 @@
 			{
 				"selector": {
 					"name": "back11Selector",
-					"file": "public/assets/items/back/selectors/back11.png"
+					"file": "public/assets/items/back/selectors/back11.png",
+					"text": "on glisse vers où ?"
 				},
 				"item": {
 					"name": "back11",
@@ -433,7 +454,8 @@
 			{
 				"selector": {
 					"name": "front1Selector",
-					"file": "public/assets/items/front/selectors/front1.png"
+					"file": "public/assets/items/front/selectors/front1.png",
+					"text": "le ciel était coloré"
 				},
 				"item": {
 					"name": "front1",
@@ -443,7 +465,8 @@
 			{
 				"selector": {
 					"name": "front2Selector",
-					"file": "public/assets/items/front/selectors/front2.png"
+					"file": "public/assets/items/front/selectors/front2.png",
+					"text": "t'as des fourmis dans les jambes ?"
 				},
 				"item": {
 					"name": "front2",
@@ -453,7 +476,8 @@
 			{
 				"selector": {
 					"name": "front3Selector",
-					"file": "public/assets/items/front/selectors/front3.png"
+					"file": "public/assets/items/front/selectors/front3.png",
+					"text": "gozilla arrive"
 				},
 				"item": {
 					"name": "front3",
@@ -463,7 +487,8 @@
 			{
 				"selector": {
 					"name": "front4Selector",
-					"file": "public/assets/items/front/selectors/front4.png"
+					"file": "public/assets/items/front/selectors/front4.png",
+					"text": "qui a perdu ses lunettes ?"
 				},
 				"item": {
 					"name": "front4",
@@ -473,7 +498,8 @@
 			{
 				"selector": {
 					"name": "front5Selector",
-					"file": "public/assets/items/front/selectors/front5.png"
+					"file": "public/assets/items/front/selectors/front5.png",
+					"text": "tiens moi la main"
 				},
 				"item": {
 					"name": "front5",
@@ -483,7 +509,8 @@
 			{
 				"selector": {
 					"name": "front6Selector",
-					"file": "public/assets/items/front/selectors/front6.png"
+					"file": "public/assets/items/front/selectors/front6.png",
+					"text": "la maison tordue"
 				},
 				"item": {
 					"name": "front6",
@@ -493,7 +520,8 @@
 			{
 				"selector": {
 					"name": "front7Selector",
-					"file": "public/assets/items/front/selectors/front7.png"
+					"file": "public/assets/items/front/selectors/front7.png",
+					"text": "on regardait au loin"
 				},
 				"item": {
 					"name": "front7",
@@ -503,7 +531,8 @@
 			{
 				"selector": {
 					"name": "front8Selector",
-					"file": "public/assets/items/front/selectors/front8.png"
+					"file": "public/assets/items/front/selectors/front8.png",
+					"text": "un humain s'étonna"
 				},
 				"item": {
 					"name": "front8",
@@ -513,7 +542,8 @@
 			{
 				"selector": {
 					"name": "front9Selector",
-					"file": "public/assets/items/front/selectors/front9.png"
+					"file": "public/assets/items/front/selectors/front9.png",
+					"text": "un ovnis passe dans le ciel"
 				},
 				"item": {
 					"name": "front9",
@@ -523,7 +553,8 @@
 			{
 				"selector": {
 					"name": "front10Selector",
-					"file": "public/assets/items/front/selectors/front10.png"
+					"file": "public/assets/items/front/selectors/front10.png",
+					"text": "vite vite, décrochez"
 				},
 				"item": {
 					"name": "front10",
@@ -533,7 +564,8 @@
 			{
 				"selector": {
 					"name": "front11Selector",
-					"file": "public/assets/items/front/selectors/front11.png"
+					"file": "public/assets/items/front/selectors/front11.png",
+					"text": "tout est à terre"
 				},
 				"item": {
 					"name": "front11",
@@ -543,7 +575,8 @@
 			{
 				"selector": {
 					"name": "front12Selector",
-					"file": "public/assets/items/front/selectors/front12.png"
+					"file": "public/assets/items/front/selectors/front12.png",
+					"text": "Monsieur X dansait"
 				},
 				"item": {
 					"name": "front12",
@@ -553,7 +586,8 @@
 			{
 				"selector": {
 					"name": "front13Selector",
-					"file": "public/assets/items/front/selectors/front13.png"
+					"file": "public/assets/items/front/selectors/front13.png",
+					"text": "on avait des tubas"
 				},
 				"item": {
 					"name": "front13",
@@ -563,7 +597,8 @@
 			{
 				"selector": {
 					"name": "front14Selector",
-					"file": "public/assets/items/front/selectors/front14.png"
+					"file": "public/assets/items/front/selectors/front14.png",
+					"text": "les fleurs fanent vite"
 				},
 				"item": {
 					"name": "front14",
@@ -573,7 +608,8 @@
 			{
 				"selector": {
 					"name": "front15Selector",
-					"file": "public/assets/items/front/selectors/front15.png"
+					"file": "public/assets/items/front/selectors/front15.png",
+					"text": "la voiture hésitait"
 				},
 				"item": {
 					"name": "front15",
