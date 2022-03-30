@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "html5-qrcode": "^2.2.0",
+    "lodash": "^4.17.21",
     "phaser": "^3.55.2",
     "qr-scanner": "^1.4.1"
   },

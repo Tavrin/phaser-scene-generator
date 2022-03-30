@@ -1,10 +1,11 @@
 import Phaser from 'phaser'
 import QrScanner from 'qr-scanner';
 import ItemSelectorQrMode from "../gameObjects/ItemSelectorQrMode";
+import * as _ from 'lodash';
 
 let itemsJson = require('../items.json');
 
-const TOTAL_BOARD_ITEMS = 35;
+const TOTAL_BOARD_ITEMS = 20;
 
 const centerWidth = window.innerWidth / 2;
 const centerHeight = window.innerHeight / 2;
@@ -21,11 +22,14 @@ const PICK_BOARDS = [
     {
         super('GameScreenQrMode')
         this.spaceKey = null;
+        this.testImage = null;
         this.eKey = null;
+        this.images = [];
         this.selectors = [];
         this.types = [];
         this.itemsNamesList = {};
         this.qrCodeIds = [];
+        this.textureId = 0;
 
         this.pickingBoards = [];
         this.selectedItems = {};
@@ -109,51 +113,38 @@ const PICK_BOARDS = [
     }
 
     startup(video) {
-        navigator.mediaDevices.getUserMedia({video: true, audio: false})
+        navigator.mediaDevices.enumerateDevices().then(r => console.log(r));
+        navigator.mediaDevices.getUserMedia({video: { deviceId: "133d3ed065010957e10471a78c8ab99a8760ccb9ed54ac804cf7123b0329b1c6",
+            },
+            audio: false
+        })
             .then((stream) => {
                 video.loadMediaStream(stream, 'canplay');
                 video.scale = 0.5;
                 video.play();
 
                 this.input.keyboard.on('keydown-E', (event) => {
+                    this.images = [];
                     let cropX = 0;
                     let cropY = 0;
 
+                    this.testScanCode(video);
+
                     for (let i = 0; i < TOTAL_BOARD_ITEMS; i++) {
-                        let snapshot = video.snapshotArea(cropX,cropY, 120, 120);
-
-                        if (this.textures.get('snapshot'+i).key === 'snapshot'+i) {
-                            let canvas = this.textures.get('snapshot'+i);
-                            canvas.source = snapshot;
-                        } else {
-                            this.textures.addCanvas('snapshot'+i, snapshot.canvas);
-                        }
-
-                        this.selectors[i].addQrImage('snapshot'+i);
-                        console.log(this.textures.get('snapshot'+i));
-
-
 
                         //let snapshot = this.add.image(500, 300, 'snapshot'+i);
-
-                        console.log(this.selectors[i].qrId);
-                        console.log(snapshot);
-                        let sourceImage = snapshot.getSourceImage();
-                            QrScanner.scanImage(sourceImage, {
-                                returnDetailedScanResult : true,
-                            })
-                                .then(result => console.log(result.data + ' - ' + i))
-                                .catch(error => console.log(error || 'No QR code found.'));
-
-
-
-
-                        cropX += 120;
                     }
+
+                    for (let i = 0; i < this.selectors.length; i++) {
+                        let image = this.load.textureManager.get(this.selectors[i].texture.key);
+
+                        image.getSourceImage();
+                        this.images.push(image.getSourceImage());
+                    }
+
+
                 });
-
-                console.log(video.video);
-
+/*
                 const scanner = new QrScanner(video.video, (result) => {this.addQrCodeId(result)}, {
                     highlightScanRegion: true,
                     highlightCodeOutline: true,
@@ -162,11 +153,62 @@ const PICK_BOARDS = [
                 video.video.width =800;
                 video.video.height = 800;
 
-                scanner.start().then(r => console.log(r));
+                scanner.start().then(r => console.log(r)); */
             })
             .catch(function(err) {
                 console.log("An error occurred: " + err);
             });
+    }
+
+    testScanCode(video, i = 0, cropX = 0, cropY = 0) {
+        let snapshot = video.snapshotArea(cropX, cropY, 120, 120);
+
+        this.load.textureManager.addCanvas('snapshot'+this.textureId, snapshot.canvas);
+
+        this.selectors[i].addQrImage('snapshot'+this.textureId);
+        let image = this.load.textureManager.get(this.selectors[i].texture.key);
+        if (i === 0) {
+            this.testImage = this.add.image(100, 100,image);
+        }
+
+
+        cropX += 130;
+
+        if (0 === (i + 1) % 5 && 15 >= i) {
+            cropX = 0;
+            cropY += 120;
+        }
+
+        this.textureId ++;
+
+        QrScanner.scanImage(this.selectors[i].texture.getCanvas(), {
+            returnDetailedScanResult : true,
+            alsoTryWithoutScanRegion : true,
+        })
+            .then(result => {
+                console.log(result)
+                if (i < TOTAL_BOARD_ITEMS - 1) {
+                    this.testScanCode(video, i+= 1, cropX, cropY)
+                }
+            })
+            .catch(error => {
+                //console.log(error || 'No QR code found.')
+                if (i < TOTAL_BOARD_ITEMS - 1) {
+                    //console.log(i);
+                    this.testScanCode(video, i += 1, cropX, cropY)
+                }
+            });
+    }
+
+    scanQrCodes() {
+        for (let i in this.images) {
+            QrScanner.scanImage(this.images[i], {
+                returnDetailedScanResult : true,
+                alsoTryWithoutScanRegion : true,
+            })
+                .then(result => console.log(result.data + ' - ' + i))
+                .catch(error => console.log(error || 'No QR code found.'));
+        }
     }
 
     addQrCodeId(result) {
@@ -249,27 +291,11 @@ const PICK_BOARDS = [
                 type : this.types[currentTypeIndex],
             })
 
-            if (i < 15) {
-                currentItemX += 150;
-            }
-
-            if ('sound' === this.types[currentTypeIndex]) {
-                if (0 === (soundIndex + 1) % 5 && 0 !== (soundIndex + 1) % 10) {
-                    currentItemX += 100;
-                } else if (0 === (soundIndex + 1) % 10) {
-                    currentItemY += 70;
-                    currentItemX = screenCenterX / 1.6;
-                } else {
-                    currentItemX += 70;
-                }
-
-                itemSelector.setScale(0.5, 0.5);
-                soundIndex += 1;
-            }
+            currentItemX += 150;
 
             if (0 === (i + 1) % 5 && 15 >= i) {
                 currentTypeIndex++;
-                'sound' === this.types[currentTypeIndex] ? (currentItemX = screenCenterX / 1.6, currentItemY += 130) : (currentItemX = screenCenterX / 1.5, currentItemY += 150);
+                currentItemX = screenCenterX / 1.5, currentItemY += 150;
             }
 
             this.selectors.push(itemSelector)
