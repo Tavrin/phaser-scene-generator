@@ -19,6 +19,8 @@ const PICK_BOARDS = [
     constructor()
     {
         super('GameScreen')
+        this.spaceKey = null;
+        this.isGenerating = false;
         this.selectors = [];
         this.types = [];
         this.itemsNamesList = {};
@@ -87,6 +89,7 @@ const PICK_BOARDS = [
         this.add.sprite(screenCenterX / 2.2, 460, 'labelFront');
         this.add.sprite(screenCenterX / 2.2, 310, 'labelBack');
         this.add.sprite(screenCenterX / 2.2, 160, 'labelBackground');
+        this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         this.setGenerateButton(screenCenterX);
 
@@ -94,25 +97,43 @@ const PICK_BOARDS = [
         this.setBoard(screenCenterX);
     }
 
+    update(time, delta) {
+        super.update(time, delta);
+
+        if (this.spaceKey.isDown && false === this.isGenerating) {
+            this.isGenerating = true;
+            this.generate();
+        }
+    }
+
+    init() {
+        console.log(this.isGenerating);
+    }
+
     setGenerateButton(screenCenterX)
     {
         let button = this.add.sprite(screenCenterX, 800, 'generateButton');
         button.setInteractive();
         button.on('pointerdown', () => {
-            for (let i in this.selectors) {
-                if (null === this.selectors[i].itemId) {
-                    continue;
-                }
+            this.generate();
+        })
+    }
 
-                if (this.selectors[i].type in this.selectedItems) {
-                    this.selectedItems[this.selectors[i].type].push(this.selectors[i].itemId);
-                }
+    generate() {
+        for (let i in this.selectors) {
+            if (null === this.selectors[i].itemId) {
+                continue;
             }
 
-            this.cameras.main.fadeOut(200, 0, 0, 0);
-            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-                this.scene.start('RenderScreen', {selectedItems: this.selectedItems});
-            })
+            if (this.selectors[i].type in this.selectedItems) {
+                this.selectedItems[this.selectors[i].type].push(this.selectors[i].itemId);
+            }
+        }
+
+        this.cameras.main.fadeOut(200, 0, 0, 0);
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+            this.scene.stop();
+            this.scene.start('RenderScreen', {selectedItems: this.selectedItems, scene: 'GameScreen'});
         })
     }
 

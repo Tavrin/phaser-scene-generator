@@ -6,18 +6,20 @@ export default class RenderScreen extends Phaser.Scene
 {
     constructor() {
         super('RenderScreen');
+        this.isResetting = false;
         this.selectedItemsSelectors = null;
         this.selectedItems = [];
+        this.previousScene = null;
         this.backGrounds = [];
         this.screenCenterX = null;
         this.screenCenterY = null;
         this.maxTries = 5000;
         this.escapeKey = null;
-        this.aKey = null;
     }
 
     init(data) {
         this.selectedItemsSelectors = data.selectedItems;
+        this.previousScene = data.scene;
         for (let type in jsonData) {
             this.selectedItems[type] = [];
         }
@@ -64,10 +66,9 @@ export default class RenderScreen extends Phaser.Scene
         this.screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
         this.escapeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
-        this.aKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.cameras.main.fadeIn(400, 0, 0, 0);
         this.cameras.main.setBackgroundColor("#fff");
-
+        this.scene.remove(this.previousScene);
         this.renderBackground();
         this.renderSprites('back', 560);
         this.renderSprites('front', 800);
@@ -77,12 +78,9 @@ export default class RenderScreen extends Phaser.Scene
     update(time, delta) {
         super.update(time, delta);
 
-        if (this.escapeKey.isDown) {
+        if (this.escapeKey.isDown && false === this.isResetting) {
+            this.isResetting = true;
             this.reset();
-        }
-
-        if (this.aKey.isDown) {
-            this.resetQr();
         }
     }
 
@@ -98,6 +96,7 @@ export default class RenderScreen extends Phaser.Scene
             sound.on('complete', () => {
                 sound = this.sound.add(this.selectedItems['sound'][index].item)
                 let text = this.add.bitmapText(this.screenCenterX / 1.7, this.screenCenterY - 100, 'averta', this.selectedItems['sound'][index].text, 72);
+                text.setDepth(999);
                 sound.play();
                 sound.on('complete', () => {
                     text.destroy();
@@ -109,6 +108,7 @@ export default class RenderScreen extends Phaser.Scene
 
         } else {
             let text = this.add.bitmapText(this.screenCenterX / 1.7, this.screenCenterY - 100, 'averta', this.selectedItems['sound'][index].text, 72);
+            text.setDepth(999);
             let sound = this.sound.add(this.selectedItems['sound'][index].item)
             sound.play();
             sound.on('complete', () => {
@@ -281,14 +281,8 @@ export default class RenderScreen extends Phaser.Scene
     reset() {
         this.cameras.main.fadeOut(200, 0, 0, 0);
         this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-            this.scene.start('GameScreen');
-        })
-    }
-
-    resetQr() {
-        this.cameras.main.fadeOut(200, 0, 0, 0);
-        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-            this.scene.start('GameScreenQrMode');
+            console.log(this.previousScene);
+            this.scene.add(this.previousScene, {}, true)
         })
     }
 }

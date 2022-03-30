@@ -22,9 +22,7 @@ const PICK_BOARDS = [
     {
         super('GameScreenQrMode')
         this.spaceKey = null;
-        this.testImage = null;
-        this.eKey = null;
-        this.images = [];
+        this.isGenerating = false;
         this.selectors = [];
         this.types = [];
         this.itemsNamesList = {};
@@ -107,7 +105,8 @@ const PICK_BOARDS = [
     update(time, delta) {
         super.update(time, delta);
 
-        if (this.spaceKey.isDown) {
+        if (this.spaceKey.isDown && false === this.isGenerating) {
+            this.isGenerating = true;
             this.generate();
         }
     }
@@ -124,36 +123,17 @@ const PICK_BOARDS = [
                 video.play();
 
                 this.input.keyboard.on('keydown-E', (event) => {
+                    for (let i in this.selectors) {
+                        this.selectors[i].clear();
+                    }
+
+                    this.qrCodeIds = [];
                     this.images = [];
                     let cropX = 0;
                     let cropY = 0;
 
                     this.testScanCode(video);
-
-                    for (let i = 0; i < TOTAL_BOARD_ITEMS; i++) {
-
-                        //let snapshot = this.add.image(500, 300, 'snapshot'+i);
-                    }
-
-                    for (let i = 0; i < this.selectors.length; i++) {
-                        let image = this.load.textureManager.get(this.selectors[i].texture.key);
-
-                        image.getSourceImage();
-                        this.images.push(image.getSourceImage());
-                    }
-
-
                 });
-/*
-                const scanner = new QrScanner(video.video, (result) => {this.addQrCodeId(result)}, {
-                    highlightScanRegion: true,
-                    highlightCodeOutline: true,
-                });
-
-                video.video.width =800;
-                video.video.height = 800;
-
-                scanner.start().then(r => console.log(r)); */
             })
             .catch(function(err) {
                 console.log("An error occurred: " + err);
@@ -161,6 +141,11 @@ const PICK_BOARDS = [
     }
 
     testScanCode(video, i = 0, cropX = 0, cropY = 0) {
+        if (i === TOTAL_BOARD_ITEMS) {
+            this.addQrCodeIds()
+            return;
+        }
+
         let snapshot = video.snapshotArea(cropX, cropY, 120, 120);
 
         this.load.textureManager.addCanvas('snapshot'+this.textureId, snapshot.canvas);
@@ -170,7 +155,6 @@ const PICK_BOARDS = [
         if (i === 0) {
             this.testImage = this.add.image(100, 100,image);
         }
-
 
         cropX += 130;
 
@@ -186,63 +170,51 @@ const PICK_BOARDS = [
             alsoTryWithoutScanRegion : true,
         })
             .then(result => {
+                this.qrCodeIds.push(result.data);
                 console.log(result)
-                if (i < TOTAL_BOARD_ITEMS - 1) {
+                this.selectors[i].tint = 0x58ff21;
+                if (i < TOTAL_BOARD_ITEMS) {
                     this.testScanCode(video, i+= 1, cropX, cropY)
                 }
             })
             .catch(error => {
+                this.selectors[i].tint = 0xff0000;
                 //console.log(error || 'No QR code found.')
-                if (i < TOTAL_BOARD_ITEMS - 1) {
+                if (i < TOTAL_BOARD_ITEMS) {
                     //console.log(i);
                     this.testScanCode(video, i += 1, cropX, cropY)
                 }
             });
     }
 
-    scanQrCodes() {
-        for (let i in this.images) {
-            QrScanner.scanImage(this.images[i], {
-                returnDetailedScanResult : true,
-                alsoTryWithoutScanRegion : true,
-            })
-                .then(result => console.log(result.data + ' - ' + i))
-                .catch(error => console.log(error || 'No QR code found.'));
-        }
-    }
-
-    addQrCodeId(result) {
-        return null;
-
-        if (this.qrCodeIds.includes(result.data)) {
-            return null;
-        }
-
-
-        for (let y in this.types) {
+    addQrCodeIds() {
+        for (let x in this.qrCodeIds) {
             firstLoop:
-            for (let i in itemsJson[this.types[y]].items) {
-                const item = itemsJson[this.types[y]].items[i];
+                for (let y in this.types) {
+                    for (let i in itemsJson[this.types[y]].items) {
+                        const item = itemsJson[this.types[y]].items[i];
 
-                if (!item['item'].name || result.data !== item['item'].name) {
-                    continue;
-                }
+                        if (!item['item'].name || this.qrCodeIds[x] !== item['item'].name) {
+                            continue;
+                        }
 
-                console.log(this.selectors);
+                        for (let u in this.selectors) {
+                            this.selectors[u].clearTint();
 
-                for (let u in this.selectors) {
-                    if (null !== this.selectors[u].itemId || this.selectors[i].type !== this.types[y]) {
-                        continue;
+                            if (null !== this.selectors[u].itemId) {
+                                continue;
+                            } else if(this.selectors[u].type !== this.types[y]) {
+                                this.selectors[u].clear();
+                                continue;
+                            }
+
+                            let selector = item['selector'].name;
+                            console.log(selector);
+                            this.selectors[u].addItem(selector);
+
+                            break firstLoop;
+                        }
                     }
-
-                    let selector = item['selector'].name;
-                    console.log(selector);
-                    this.qrCodeIds.push(result.data);
-                    this.selectors[i].addItem(selector);
-                    console.log(this.selectors[i]);
-
-                    break firstLoop;
-                }
             }
         }
 
@@ -271,7 +243,8 @@ const PICK_BOARDS = [
 
         this.cameras.main.fadeOut(200, 0, 0, 0);
         this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-            this.scene.start('RenderScreen', {selectedItems: this.selectedItems});
+            this.scene.stop();
+            this.scene.start('RenderScreen', {selectedItems: this.selectedItems, scene : 'GameScreenQrMode'});
         })
     }
 
