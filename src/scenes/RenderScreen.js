@@ -47,7 +47,7 @@ export default class RenderScreen extends Phaser.Scene
                         if (item.type && item.type === 'color') {
                             data = {
                                 'item': item['item'].color,
-                                'text' : decodeURIComponent(escape(item['selector'].text)) ?? null
+                                'text' : decodeURIComponent(item['selector'].text) ?? null
                             };
                             this.selectedItems['backgroundColor'].push(data)
 
@@ -58,7 +58,7 @@ export default class RenderScreen extends Phaser.Scene
                             this.load.audio(item['item'].name, item['item'].file);
                             let soundData = {
                                 'item': item['item'].name,
-                                'text' : decodeURIComponent(escape(item['selector'].text))
+                                'text' : decodeURIComponent(item['selector'].text)
                             };
 
                             this.selectedItems[type].push(soundData);
@@ -88,7 +88,11 @@ export default class RenderScreen extends Phaser.Scene
         this.cameras.main.setBackgroundColor("#fff");
         this.renderBackground();
         this.renderSprites('back', 560);
-        this.renderSprites('front', 750);
+        this.renderSprites('front', 900);
+
+        this.input.keyboard.on('keydown-SPACE', (event) => {
+            console.log('test2');
+        })
         this.setAudio();
     }
 
@@ -127,6 +131,7 @@ export default class RenderScreen extends Phaser.Scene
             for (let y in this.selectedItems[i]) {
                 if (this.selectedItems[i][y]['text']) {
                     let text = this.add.bitmapText(this.screenCenterX / 1.5, this.screenCenterY - 300, 'averta', this.selectedItems[i][y]['text'], 72);
+                    text.setDepth(999);
                     text.setVisible(false);
                     this.texts.push(text)
                 }

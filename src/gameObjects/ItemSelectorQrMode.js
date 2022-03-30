@@ -36,6 +36,7 @@ export default class ItemSelectorQrMode extends Phaser.GameObjects.Sprite {
     clear() {
         this.itemId = null;
         this.setTexture('addItemButton');
+        this.clearTint();
     }
 
     addQrImage(qrName) {
