@@ -36,7 +36,7 @@ const PICK_BOARDS = [
 
             for (let i in itemsJson[type].items) {
                 if (type === 'sound') {
-                    let text = decodeURIComponent(escape(itemsJson[type].items[i]['selector'].text));
+                    let text = decodeURIComponent(itemsJson[type].items[i]['selector'].text);
                     let soundData = {
                         'selector': itemsJson[type].items[i]['selector'].name,
                         'text': text

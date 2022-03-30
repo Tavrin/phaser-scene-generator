@@ -38,7 +38,7 @@ const PICK_BOARDS = [
 
             for (let i in itemsJson[type].items) {
                 if (type === 'sound') {
-                    let text = decodeURIComponent(escape(itemsJson[type].items[i]['selector'].text));
+                    let text = decodeURIComponent(itemsJson[type].items[i]['selector'].text);
                     let soundData = {
                         'selector': itemsJson[type].items[i]['selector'].name,
                         'text': text
@@ -111,33 +111,45 @@ const PICK_BOARDS = [
     }
 
     startup(video) {
-        navigator.mediaDevices.enumerateDevices().then(r => console.log(r));
-        navigator.mediaDevices.getUserMedia({video: { deviceId: "133d3ed065010957e10471a78c8ab99a8760ccb9ed54ac804cf7123b0329b1c6",
-            },
-            audio: false
-        })
-            .then((stream) => {
-                video.loadMediaStream(stream, 'canplay');
-                console.log(video.height);
-                video.scale = 0.5;
-                video.play();
-
-                this.input.keyboard.on('keydown-E', (event) => {
-                    for (let i in this.selectors) {
-                        this.selectors[i].clear();
-                    }
-
-                    this.qrCodeIds = [];
-                    this.images = [];
-                    let cropX = 0;
-                    let cropY = 0;
-
-                    this.testScanCode(video);
-                });
+        navigator.mediaDevices.enumerateDevices().then((mediaInfo) =>
+        {
+            let cameraId = 'bb1c0f8d2e454bda29b46f0b986abf6ec457a925bb63a2d3a18265487d586f24';
+            console.log(mediaInfo);
+            for (let i in mediaInfo) {
+                if ('Logitech BRIO (046d:085e)' === mediaInfo[i].label) {
+                    cameraId = mediaInfo[i].deviceId;
+                    break;
+                }
+            }
+            navigator.mediaDevices.getUserMedia({
+                video: {
+                    deviceId: cameraId,
+                },
+                audio: false
             })
-            .catch(function(err) {
-                console.log("An error occurred: " + err);
-            });
+                .then((stream) => {
+                    video.loadMediaStream(stream, 'canplay');
+                    console.log(video.height);
+                    video.scale = 0.5;
+                    video.play();
+
+                    this.input.keyboard.on('keydown-E', (event) => {
+                        for (let i in this.selectors) {
+                            this.selectors[i].clear();
+                        }
+
+                        this.qrCodeIds = [];
+                        this.images = [];
+                        let cropX = 0;
+                        let cropY = 0;
+
+                        this.testScanCode(video);
+                    });
+                })
+                .catch(function (err) {
+                    console.log("An error occurred: " + err);
+                })
+        });
     }
 
     testScanCode(video, i = 0, cropX = 0, cropY = 0) {
@@ -152,15 +164,12 @@ const PICK_BOARDS = [
 
         this.selectors[i].addQrImage('snapshot'+this.textureId);
         let image = this.load.textureManager.get(this.selectors[i].texture.key);
-        if (i === 0) {
-            this.testImage = this.add.image(100, 100,image);
-        }
 
-        cropX += 100;
+        cropX += 130;
 
         if (0 === (i + 1) % 5 && 15 >= i) {
             cropX = 0;
-            cropY += 100;
+            cropY += 130;
         }
 
         this.textureId ++;
@@ -208,9 +217,10 @@ const PICK_BOARDS = [
                                 continue;
                             }
 
+                            let text = item['selector'].text ?? null;
                             let selector = item['selector'].name;
                             console.log(selector);
-                            this.selectors[u].addItem(selector);
+                            this.selectors[u].addItem(selector, text);
 
                             break firstLoop;
                         }
@@ -218,7 +228,13 @@ const PICK_BOARDS = [
             }
         }
 
-        console.log(this.qrCodeIds);
+        for (let i in this.selectors) {
+            if (null === this.selectors[i].itemId) {
+                this.selectors[i].clear();
+            }
+        }
+
+            console.log(this.qrCodeIds);
     }
 
     setGenerateButton(screenCenterX)
