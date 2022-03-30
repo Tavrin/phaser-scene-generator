@@ -29,34 +29,38 @@ export default class RenderScreen extends Phaser.Scene
 
     preload()
     {
-        for (let type in jsonData) {
-            for (let i in jsonData[type].items) {
-                const item = jsonData[type].items[i];
-                if (!this.selectedItemsSelectors[type].includes(item['selector'].name)) {
-                    continue;
+        for (let selectedItemType in this.selectedItemsSelectors) {
+            for (let selectedItem in this.selectedItemsSelectors[selectedItemType]) {
+                for (let type in jsonData) {
+                    for (let i in jsonData[type].items) {
+                        const item = jsonData[type].items[i];
+                        if (this.selectedItemsSelectors[selectedItemType][selectedItem] !==item ['selector'].name) {
+                            continue;
+                        }
+
+                        if (item.type && item.type === 'color') {
+                            this.selectedItems['backgroundColor'].push(item['item'].color)
+
+                            continue;
+                        }
+
+                        if (type === 'sound') {
+                            this.load.audio(item['item'].name, item['item'].file);
+                            let soundData = {
+                                'item': item['item'].name,
+                                'text' : decodeURIComponent(escape(item['selector'].text))
+                            };
+
+                            this.selectedItems[type].push(soundData);
+
+                            continue;
+                        } else {
+                            this.load.image(item['item'].name, item['item'].file);
+                        }
+
+                        this.selectedItems[type].push(item['item'].name);
+                    }
                 }
-
-                if (item.type && item.type === 'color') {
-                    this.selectedItems['backgroundColor'].push(item['item'].color)
-
-                    continue;
-                }
-
-                if (type === 'sound') {
-                    this.load.audio(item['item'].name, item['item'].file);
-                    let soundData = {
-                        'item': item['item'].name,
-                        'text' : decodeURIComponent(escape(item['selector'].text))
-                    };
-
-                    this.selectedItems[type].push(soundData);
-
-                    continue;
-                } else {
-                    this.load.image(item['item'].name, item['item'].file);
-                }
-
-                this.selectedItems[type].push(item['item'].name);
             }
         }
     }
@@ -72,6 +76,7 @@ export default class RenderScreen extends Phaser.Scene
         this.renderBackground();
         this.renderSprites('back', 560);
         this.renderSprites('front', 800);
+        console.log(this.selectedItems['sound']);
         this.setAudio();
     }
 
@@ -90,34 +95,17 @@ export default class RenderScreen extends Phaser.Scene
             return;
         }
 
-        if (0 === index) {
-            let sound = this.sound.add('audioDebut')
-            sound.play();
-            sound.on('complete', () => {
-                sound = this.sound.add(this.selectedItems['sound'][index].item)
-                let text = this.add.bitmapText(this.screenCenterX / 1.7, this.screenCenterY - 100, 'averta', this.selectedItems['sound'][index].text, 72);
-                text.setDepth(999);
-                sound.play();
-                sound.on('complete', () => {
-                    text.destroy();
-                    if (index < this.selectedItems['sound'].length - 1) {
-                        this.setAudio(++index)
-                    }
-                })
-            })
-
-        } else {
-            let text = this.add.bitmapText(this.screenCenterX / 1.7, this.screenCenterY - 100, 'averta', this.selectedItems['sound'][index].text, 72);
-            text.setDepth(999);
-            let sound = this.sound.add(this.selectedItems['sound'][index].item)
-            sound.play();
-            sound.on('complete', () => {
-                text.destroy();
-                if (index < this.selectedItems['sound'].length - 1) {
-                    this.setAudio(++index)
-                }
-            })
-        }
+        console.log(this.selectedItems['sound'][index].item);
+        let text = this.add.bitmapText(this.screenCenterX / 1.5, this.screenCenterY - 300, 'averta', this.selectedItems['sound'][index].text, 72);
+        text.setDepth(999);
+        let sound = this.sound.add(this.selectedItems['sound'][index].item)
+        sound.play();
+        sound.on('complete', () => {
+            text.destroy();
+            if (index < this.selectedItems['sound'].length - 1) {
+                this.setAudio(++index)
+            }
+        })
     }
 
     renderBackground()

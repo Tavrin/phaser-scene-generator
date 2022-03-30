@@ -636,156 +636,167 @@
 		"items": [
 			{
 				"selector": {
+					"name": "sound1Selector",
+					"file": "public/assets/items/sound/selectors/sound1.png",
+					"text": "un alien arrive"
+				},
+				"item": {
+					"name": "sound1",
+					"file": "public/assets/items/sound/sound1.mp3"
+				}
+			},
+			{
+				"selector": {
 					"name": "sound2Selector",
 					"file": "public/assets/items/sound/selectors/sound2.png",
-					"text": "A la plage"
+					"text": "tout le monde applaudit"
 				},
 				"item": {
 					"name": "sound2",
-					"file": "public/assets/items/sound/sound2.wav"
+					"file": "public/assets/items/sound/sound2.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound3Selector",
 					"file": "public/assets/items/sound/selectors/sound3.png",
-					"text": "En ville"
+					"text": "il y avait de grosses bulles"
 				},
 				"item": {
 					"name": "sound3",
-					"file": "public/assets/items/sound/sound3.wav"
+					"file": "public/assets/items/sound/sound3.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound4Selector",
 					"file": "public/assets/items/sound/selectors/sound4.png",
-					"text": "A la montagne"
+					"text": "on entendait un cheval"
 				},
 				"item": {
 					"name": "sound4",
-					"file": "public/assets/items/sound/sound4.wav"
+					"file": "public/assets/items/sound/sound4.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound5Selector",
 					"file": "public/assets/items/sound/selectors/sound5.png",
-					"text": "A la campagne"
+					"text": "c'etait l'heure de manger"
 				},
 				"item": {
 					"name": "sound5",
-					"file": "public/assets/items/sound/sound5.wav"
+					"file": "public/assets/items/sound/sound5.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound6Selector",
 					"file": "public/assets/items/sound/selectors/sound6.png",
-					"text": "Pendant une matinée"
+					"text": "\"j'ai tout déchiré"
 				},
 				"item": {
 					"name": "sound6",
-					"file": "public/assets/items/sound/sound6.wav"
+					"file": "public/assets/items/sound/sound6.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound7Selector",
 					"file": "public/assets/items/sound/selectors/sound7.png",
-					"text": "Pendant une journée"
+					"text": "une main parlait"
 				},
 				"item": {
 					"name": "sound7",
-					"file": "public/assets/items/sound/sound7.wav"
+					"file": "public/assets/items/sound/sound7.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound8Selector",
 					"file": "public/assets/items/sound/selectors/sound8.png",
-					"text": "Pendant une soirée"
+					"text": "le temps d'une ballade"
 				},
 				"item": {
 					"name": "sound8",
-					"file": "public/assets/items/sound/sound8.wav"
+					"file": "public/assets/items/sound/sound8.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound9Selector",
 					"file": "public/assets/items/sound/selectors/sound9.png",
-					"text": "Ensoleillée"
+					"text": "au bord de l'ocean"
 				},
 				"item": {
 					"name": "sound9",
-					"file": "public/assets/items/sound/sound9.wav"
+					"file": "public/assets/items/sound/sound9.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound10Selector",
 					"file": "public/assets/items/sound/selectors/sound10.png",
-					"text": "Grisâtre"
+					"text": "les oiseaux chantaient"
 				},
 				"item": {
 					"name": "sound10",
-					"file": "public/assets/items/sound/sound10.wav"
+					"file": "public/assets/items/sound/sound10.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound11Selector",
 					"file": "public/assets/items/sound/selectors/sound11.png",
-					"text": "Pluvieuse"
+					"text": "en été"
 				},
 				"item": {
 					"name": "sound11",
-					"file": "public/assets/items/sound/sound11.wav"
+					"file": "public/assets/items/sound/sound11.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound12Selector",
 					"file": "public/assets/items/sound/selectors/sound12.png",
-					"text": "Orageuse"
+					"text": "pendant la récréation"
 				},
 				"item": {
 					"name": "sound12",
-					"file": "public/assets/items/sound/sound12.wav"
+					"file": "public/assets/items/sound/sound12.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound13Selector",
 					"file": "public/assets/items/sound/selectors/sound13.png",
-					"text": "En été"
+					"text": "le telephone sonne"
 				},
 				"item": {
 					"name": "sound13",
-					"file": "public/assets/items/sound/sound13.wav"
+					"file": "public/assets/items/sound/sound13.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound14Selector",
 					"file": "public/assets/items/sound/selectors/sound14.png",
-					"text": "En automne"
+					"text": "un nouvel immeuble se construit"
 				},
 				"item": {
 					"name": "sound14",
-					"file": "public/assets/items/sound/sound14.wav"
+					"file": "public/assets/items/sound/sound14.mp3"
 				}
 			},
 			{
 				"selector": {
 					"name": "sound15Selector",
 					"file": "public/assets/items/sound/selectors/sound15.png",
-					"text": "En hiver"
+					"text": "face au mistral"
 				},
 				"item": {
 					"name": "sound15",
-					"file": "public/assets/items/sound/sound15.wav"
+					"file": "public/assets/items/sound/sound15.mp3"
 				}
 			},
 			{

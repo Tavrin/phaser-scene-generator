@@ -69,7 +69,7 @@ const PICK_BOARDS = [
         this.load.image(PICK_BOARDS[2], 'public/assets/img/pickboard-front.png');
         this.load.image(PICK_BOARDS[3], 'public/assets/img/pickboard-sound.png');
         this.load.image('back', 'public/assets/img/retour.png');
-        this.load.audio('audioDebut', 'public/assets/items/sound/sound1.wav');
+        //this.load.audio('audioDebut', 'public/assets/items/sound/sound1.wav');
 
         this.loadItems();
     }

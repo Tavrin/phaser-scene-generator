@@ -72,7 +72,7 @@ const PICK_BOARDS = [
         this.load.image(PICK_BOARDS[2], 'public/assets/img/pickboard-front.png');
         this.load.image(PICK_BOARDS[3], 'public/assets/img/pickboard-sound.png');
         this.load.image('back', 'public/assets/img/retour.png');
-        this.load.audio('audioDebut', 'public/assets/items/sound/sound1.wav');
+        //this.load.audio('audioDebut', 'public/assets/items/sound/sound1.wav');
 
         this.loadItems();
     }
@@ -119,6 +119,7 @@ const PICK_BOARDS = [
         })
             .then((stream) => {
                 video.loadMediaStream(stream, 'canplay');
+                console.log(video.height);
                 video.scale = 0.5;
                 video.play();
 
@@ -156,11 +157,11 @@ const PICK_BOARDS = [
             this.testImage = this.add.image(100, 100,image);
         }
 
-        cropX += 130;
+        cropX += 100;
 
         if (0 === (i + 1) % 5 && 15 >= i) {
             cropX = 0;
-            cropY += 120;
+            cropY += 100;
         }
 
         this.textureId ++;
