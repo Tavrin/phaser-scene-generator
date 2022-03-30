@@ -18,9 +18,9 @@ const PICK_BOARDS = [
 
     export default class GameScreenQrMode extends Phaser.Scene
 {
-    constructor()
+    constructor(handle = 'GameScreenQrMode')
     {
-        super('GameScreenQrMode')
+        super(handle)
         this.spaceKey = null;
         this.isGenerating = false;
         this.selectors = [];
