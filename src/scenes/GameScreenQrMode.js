@@ -1,7 +1,8 @@
 import Phaser from 'phaser'
 import QrScanner from 'qr-scanner';
 import ItemSelectorQrMode from "../gameObjects/ItemSelectorQrMode";
-import game from "../game";
+import {utils} from "../utils";
+import RenderScreen from "./RenderScreen";
 
 let itemsJson = require('../items.json');
 
@@ -22,8 +23,8 @@ const PICK_BOARDS = [
     {
         super(handle)
         console.log("test");
-
-        this.spaceKey = null;
+        this.isScanning = false;
+        this.xKey = null;
         this.isGenerating = false;
         this.selectors = [];
         this.types = [];
@@ -94,8 +95,8 @@ const PICK_BOARDS = [
         this.add.sprite(screenCenterX / 2.2, 460, 'labelFront');
         this.add.sprite(screenCenterX / 2.2, 310, 'labelBack');
         this.add.sprite(screenCenterX / 2.2, 160, 'labelBackground');
-        this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+        this.xKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
+        this.eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
 
         this.setGenerateButton(screenCenterX);
         this.setBoard(screenCenterX);
@@ -107,7 +108,7 @@ const PICK_BOARDS = [
     update(time, delta) {
         super.update(time, delta);
 
-        if (this.spaceKey.isDown && false === this.isGenerating) {
+        if (this.xKey.isDown) {
             this.generate();
         }
     }
@@ -135,7 +136,14 @@ const PICK_BOARDS = [
                     video.scale = 0.5;
                     video.play();
 
-                    this.input.keyboard.on('keydown-E', (event) => {
+                    this.input.keyboard.on('keydown-K', (event) => {
+                        console.log(this.isScanning);
+                        if (true === this.isScanning) {
+                            return
+                        }
+
+                        this.isScanning = true;
+
                         for (let i in this.selectors) {
                             this.selectors[i].clear();
                         }
@@ -156,6 +164,8 @@ const PICK_BOARDS = [
 
     testScanCode(video, i = 0, cropX = 0, cropY = 0) {
         if (i === TOTAL_BOARD_ITEMS) {
+            this.isScanning = false;
+            console.log(this.isScanning);
             this.addQrCodeIds()
             return;
         }
@@ -244,12 +254,15 @@ const PICK_BOARDS = [
         let button = this.add.sprite(screenCenterX, 800, 'generateButton');
         button.setInteractive();
         button.on('pointerdown', () => {
-            if (false === this.isGenerating) {
                 this.generate();
-            }        })
+        })
     }
 
     generate() {
+        if ( true === this.isGenerating || true === this.isScanning) {
+            return;
+        }
+
         this.isGenerating = true;
         for (let i in this.selectors) {
             if (null === this.selectors[i].itemId) {
@@ -264,7 +277,15 @@ const PICK_BOARDS = [
         this.cameras.main.fadeOut(200, 0, 0, 0);
         this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
             this.scene.stop();
-            this.scene.start('RenderScreen', {selectedItems: this.selectedItems, scene : 'GameScreenQrMode'});
+            if (this.scene.get('RenderScreen' + utils.getPreviousRenderSceneIndex())) {
+                this.scene.remove('RenderScreen' + utils.getPreviousRenderSceneIndex());
+            }
+
+            console.log(utils.getPreviousRenderSceneIndex());
+            utils.incrementPreviousRenderSceneIndex();
+            let key = 'RenderScreen' + utils.getPreviousRenderSceneIndex();
+            let spawned = new RenderScreen(key);
+            this.scene.add(key, spawned, true, {selectedItems: this.selectedItems, scene: 'GameScreenQrMode'});
         })
     }
 

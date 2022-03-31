@@ -20,6 +20,7 @@ export default class RenderScreen extends Phaser.Scene
         this.screenCenterY = null;
         this.texts = [];
         this.escapeKey = null;
+        this.lKey = null;
     }
 
     init(data) {
@@ -89,6 +90,7 @@ export default class RenderScreen extends Phaser.Scene
         this.screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
         this.escapeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+        this.lKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
         this.cameras.main.fadeIn(400, 0, 0, 0);
         this.cameras.main.setBackgroundColor("#fff");
         this.renderBackground();
@@ -101,7 +103,7 @@ export default class RenderScreen extends Phaser.Scene
     update(time, delta) {
         super.update(time, delta);
 
-        if (this.escapeKey.isDown && false === this.isResetting) {
+        if ((this.escapeKey.isDown || this.lKey.isDown) && false === this.isResetting) {
             this.isResetting = true;
             this.reset();
         }
