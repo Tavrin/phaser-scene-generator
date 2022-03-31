@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import QrScanner from 'qr-scanner';
 import ItemSelectorQrMode from "../gameObjects/ItemSelectorQrMode";
+import game from "../game";
 
 let itemsJson = require('../items.json');
 
@@ -20,6 +21,8 @@ const PICK_BOARDS = [
     constructor(handle = 'GameScreenQrMode')
     {
         super(handle)
+        console.log("test");
+
         this.spaceKey = null;
         this.isGenerating = false;
         this.selectors = [];
@@ -38,7 +41,7 @@ const PICK_BOARDS = [
 
             for (let i in itemsJson[type].items) {
                 if (type === 'sound') {
-                    let text = decodeURIComponent(itemsJson[type].items[i]['selector'].text);
+                    let text = decodeURIComponent(escape(itemsJson[type].items[i]['selector'].text));
                     let soundData = {
                         'selector': itemsJson[type].items[i]['selector'].name,
                         'text': text
@@ -105,7 +108,6 @@ const PICK_BOARDS = [
         super.update(time, delta);
 
         if (this.spaceKey.isDown && false === this.isGenerating) {
-            this.isGenerating = true;
             this.generate();
         }
     }
@@ -242,11 +244,13 @@ const PICK_BOARDS = [
         let button = this.add.sprite(screenCenterX, 800, 'generateButton');
         button.setInteractive();
         button.on('pointerdown', () => {
-            this.generate();
-        })
+            if (false === this.isGenerating) {
+                this.generate();
+            }        })
     }
 
     generate() {
+        this.isGenerating = true;
         for (let i in this.selectors) {
             if (null === this.selectors[i].itemId) {
                 continue;
