@@ -1,6 +1,4 @@
 import Phaser from 'phaser';
-import TitleScreen from './scenes/TitleScreen';
-import GameScreen from "./scenes/GameScreen";
 import GameScreenQrMode from "./scenes/GameScreenQrMode";
 import RenderScreen from "./scenes/RenderScreen";
 
@@ -9,7 +7,7 @@ const config = {
     mode: Phaser.Scale.FIT,
     width: window.innerWidth,
     height: window.innerHeight,
-    scene: [TitleScreen, GameScreen, GameScreenQrMode, RenderScreen]
+    scene: [GameScreenQrMode, RenderScreen]
 };
 
 let game = new Phaser.Game(config)
