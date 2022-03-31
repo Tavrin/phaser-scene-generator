@@ -1,13 +1,14 @@
 import Phaser from 'phaser'
 import GameScreenQrMode from "./GameScreenQrMode";
 import GameScreen from "./GameScreen";
+import {utils} from "../utils";
 const jsonData= require('../items.json');
 const MINIMAL_DISTANCE = 250;
 
 export default class RenderScreen extends Phaser.Scene
 {
-    constructor() {
-        super('RenderScreen');
+    constructor(handle = 'RenderScreen') {
+        super(handle);
         this.previousIndex = 0;
         this.isResetting = false;
         this.selectedItemsSelectors = null;
@@ -19,11 +20,15 @@ export default class RenderScreen extends Phaser.Scene
         this.screenCenterY = null;
         this.texts = [];
         this.escapeKey = null;
+        this.lKey = null;
     }
 
     init(data) {
+        console.log(this.isResetting);
         this.selectedItemsSelectors = data.selectedItems;
         this.previousScene = data.scene;
+            console.log(utils.getPreviousSceneIndex());
+        utils.incrementPreviousSceneIndex();
         this.previousIndex += 1;
         for (let type in jsonData) {
             this.selectedItems[type] = [];
@@ -47,7 +52,7 @@ export default class RenderScreen extends Phaser.Scene
                         if (item.type && item.type === 'color') {
                             data = {
                                 'item': item['item'].color,
-                                'text' : decodeURIComponent(item['selector'].text) ?? null
+                                'text' : decodeURIComponent(escape(item['selector'].text)) ?? null
                             };
                             this.selectedItems['backgroundColor'].push(data)
 
@@ -58,7 +63,7 @@ export default class RenderScreen extends Phaser.Scene
                             this.load.audio(item['item'].name, item['item'].file);
                             let soundData = {
                                 'item': item['item'].name,
-                                'text' : decodeURIComponent(item['selector'].text)
+                                'text' : decodeURIComponent(escape(item['selector'].text))
                             };
 
                             this.selectedItems[type].push(soundData);
@@ -81,25 +86,24 @@ export default class RenderScreen extends Phaser.Scene
 
     create()
     {
+        this.bottom = this.cameras.main.worldView.bottom;
         this.screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
         this.escapeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+        this.lKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
         this.cameras.main.fadeIn(400, 0, 0, 0);
         this.cameras.main.setBackgroundColor("#fff");
         this.renderBackground();
         this.renderSprites('back', 560);
         this.renderSprites('front', 900);
 
-        this.input.keyboard.on('keydown-SPACE', (event) => {
-            console.log('test2');
-        })
         this.setAudio();
     }
 
     update(time, delta) {
         super.update(time, delta);
 
-        if (this.escapeKey.isDown && false === this.isResetting) {
+        if ((this.escapeKey.isDown || this.lKey.isDown) && false === this.isResetting) {
             this.isResetting = true;
             this.reset();
         }
@@ -112,7 +116,7 @@ export default class RenderScreen extends Phaser.Scene
             return;
         }
 
-        let text = this.add.bitmapText(this.screenCenterX / 1.5, this.screenCenterY - 300, 'averta', this.selectedItems['sound'][index].text, 72);
+        let text = this.add.bitmapText(this.screenCenterX, this.screenCenterY + this.screenCenterY / 1.2, 'averta', this.selectedItems['sound'][index].text, 72, 1).setOrigin(0.5);
         text.setDepth(999);
         this.currentSound = this.sound.add(this.selectedItems['sound'][index].item)
         this.currentSound.play();
@@ -130,7 +134,7 @@ export default class RenderScreen extends Phaser.Scene
 
             for (let y in this.selectedItems[i]) {
                 if (this.selectedItems[i][y]['text']) {
-                    let text = this.add.bitmapText(this.screenCenterX / 1.5, this.screenCenterY - 300, 'averta', this.selectedItems[i][y]['text'], 72);
+                    let text = this.add.bitmapText(this.screenCenterX, this.screenCenterY + this.screenCenterY / 1.2, 'averta', this.selectedItems[i][y]['text'], 72, 1).setOrigin(0.5);
                     text.setDepth(999);
                     text.setVisible(false);
                     this.texts.push(text)
@@ -139,12 +143,10 @@ export default class RenderScreen extends Phaser.Scene
 
         }
 
-        console.log(this.texts);
-        this.textTween(0)
+        this.textTween(0);
     }
 
     textTween( i = 0) {
-        console.log(i);
         if (i === this.texts.length) {
             return;
         }
@@ -346,13 +348,12 @@ export default class RenderScreen extends Phaser.Scene
     }
 
     reset() {
-        console.log('test');
         this.cameras.main.fadeOut(200, 0, 0, 0);
         this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
             this.scene.stop();
             this.scene.remove(this.previousScene);
-            this.isResetting = false;
-            let key = this.previousScene + this.previousIndex;
+            console.log(utils.getPreviousSceneIndex());
+            let key = this.previousScene + utils.getPreviousSceneIndex();
             let spawned = null;
 
            if ('GameScreen' === this.previousScene) {

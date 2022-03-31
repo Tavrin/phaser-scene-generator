@@ -4,7 +4,8 @@ import ItemPickingBoard from "../gameObjects/ItemPickingBoard";
 import QrScanner from 'qr-scanner';
 import {Html5QrcodeScanner} from "html5-qrcode";
 let itemsJson = require('../items.json');
-
+import {utils} from "../utils";
+import RenderScreen from "./RenderScreen";
 const centerWidth = window.innerWidth / 2;
 const centerHeight = window.innerHeight / 2;
 const PICK_BOARDS = [
@@ -36,7 +37,7 @@ const PICK_BOARDS = [
 
             for (let i in itemsJson[type].items) {
                 if (type === 'sound') {
-                    let text = decodeURIComponent(itemsJson[type].items[i]['selector'].text);
+                    let text = decodeURIComponent(escape(itemsJson[type].items[i]['selector'].text));
                     let soundData = {
                         'selector': itemsJson[type].items[i]['selector'].name,
                         'text': text
@@ -101,7 +102,6 @@ const PICK_BOARDS = [
         super.update(time, delta);
 
         if (this.spaceKey.isDown && false === this.isGenerating) {
-            this.isGenerating = true;
             this.generate();
         }
     }
@@ -115,11 +115,14 @@ const PICK_BOARDS = [
         let button = this.add.sprite(screenCenterX, 800, 'generateButton');
         button.setInteractive();
         button.on('pointerdown', () => {
-            this.generate();
+            if (false === this.isGenerating) {
+                this.generate();
+            }
         })
     }
 
     generate() {
+        this.isGenerating = true;
         for (let i in this.selectors) {
             if (null === this.selectors[i].itemId) {
                 continue;
@@ -133,7 +136,15 @@ const PICK_BOARDS = [
         this.cameras.main.fadeOut(200, 0, 0, 0);
         this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
             this.scene.stop();
-            this.scene.start('RenderScreen', {selectedItems: this.selectedItems, scene: 'GameScreen'});
+            if (this.scene.get('RenderScreen' + utils.getPreviousRenderSceneIndex())) {
+                this.scene.remove('RenderScreen' + utils.getPreviousRenderSceneIndex());
+            }
+
+            console.log(utils.getPreviousRenderSceneIndex());
+            utils.incrementPreviousRenderSceneIndex();
+            let key = 'RenderScreen' + utils.getPreviousRenderSceneIndex();
+            let spawned = new RenderScreen(key);
+            this.scene.add(key, spawned, true, {selectedItems: this.selectedItems, scene: 'GameScreen'});
         })
     }
 

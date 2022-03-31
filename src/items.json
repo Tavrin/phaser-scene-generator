@@ -356,96 +356,6 @@
 					"name": "back11",
 					"file": "public/assets/items/back/back11.png"
 				}
-			},
-			{
-				"selector": {
-					"name": "back12Selector",
-					"file": "public/assets/items/back/selectors/back12.png"
-				},
-				"item": {
-					"name": "back12",
-					"file": "public/assets/items/back/back12.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "back13Selector",
-					"file": "public/assets/items/back/selectors/back13.png"
-				},
-				"item": {
-					"name": "back13",
-					"file": "public/assets/items/back/back13.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "back14Selector",
-					"file": "public/assets/items/back/selectors/back14.png"
-				},
-				"item": {
-					"name": "back14",
-					"file": "public/assets/items/back/back14.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "back15Selector",
-					"file": "public/assets/items/back/selectors/back15.png"
-				},
-				"item": {
-					"name": "back15",
-					"file": "public/assets/items/back/back15.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "back16Selector",
-					"file": "public/assets/items/back/selectors/back16.png"
-				},
-				"item": {
-					"name": "back16",
-					"file": "public/assets/items/back/back16.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "back17Selector",
-					"file": "public/assets/items/back/selectors/back17.png"
-				},
-				"item": {
-					"name": "back17",
-					"file": "public/assets/items/back/back17.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "back18Selector",
-					"file": "public/assets/items/back/selectors/back18.png"
-				},
-				"item": {
-					"name": "back18",
-					"file": "public/assets/items/back/back18.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "back19Selector",
-					"file": "public/assets/items/back/selectors/back19.png"
-				},
-				"item": {
-					"name": "back19",
-					"file": "public/assets/items/back/back19.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "back20Selector",
-					"file": "public/assets/items/back/selectors/back20.png"
-				},
-				"item": {
-					"name": "back20",
-					"file": "public/assets/items/back/back20.png"
-				}
 			}
 		]
 	},
@@ -615,56 +525,6 @@
 					"name": "front15",
 					"file": "public/assets/items/front/front15.png"
 				}
-			},
-			{
-				"selector": {
-					"name": "front16Selector",
-					"file": "public/assets/items/front/selectors/front16.png"
-				},
-				"item": {
-					"name": "front16",
-					"file": "public/assets/items/front/front16.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "front17Selector",
-					"file": "public/assets/items/front/selectors/front17.png"
-				},
-				"item": {
-					"name": "front17",
-					"file": "public/assets/items/front/front17.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "front18Selector",
-					"file": "public/assets/items/front/selectors/front18.png"
-				},
-				"item": {
-					"name": "front18",
-					"file": "public/assets/items/front/front18.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "front19Selector",
-					"file": "public/assets/items/front/selectors/front19.png"
-				},
-				"item": {
-					"name": "front19",
-					"file": "public/assets/items/front/front19.png"
-				}
-			},
-			{
-				"selector": {
-					"name": "front20Selector",
-					"file": "public/assets/items/front/selectors/front20.png"
-				},
-				"item": {
-					"name": "front20",
-					"file": "public/assets/items/front/front20.png"
-				}
 			}
 		]
 	},
@@ -729,7 +589,7 @@
 				"selector": {
 					"name": "sound6Selector",
 					"file": "public/assets/items/sound/selectors/sound6.png",
-					"text": "\"j'ai tout déchiré"
+					"text": "j'ai tout déchiré"
 				},
 				"item": {
 					"name": "sound6",
@@ -833,105 +693,6 @@
 				"item": {
 					"name": "sound15",
 					"file": "public/assets/items/sound/sound15.mp3"
-				}
-			},
-			{
-				"selector": {
-					"name": "sound16Selector",
-					"file": "public/assets/items/sound/selectors/sound16.png",
-					"text": "Au printemps"
-				},
-				"item": {
-					"name": "sound16",
-					"file": "public/assets/items/sound/sound16.wav"
-				}
-			},
-			{
-				"selector": {
-					"name": "sound17Selector",
-					"file": "public/assets/items/sound/selectors/sound17.png",
-					"text": "Une fête qui s'organisait"
-				},
-				"item": {
-					"name": "sound17",
-					"file": "public/assets/items/sound/sound17.wav"
-				}
-			},
-			{
-				"selector": {
-					"name": "sound18Selector",
-					"file": "public/assets/items/sound/selectors/sound18.png",
-					"text": "Un grand repas s'organisait"
-				},
-				"item": {
-					"name": "sound18",
-					"file": "public/assets/items/sound/sound18.wav"
-				}
-			},
-			{
-				"selector": {
-					"name": "sound19Selector",
-					"file": "public/assets/items/sound/selectors/sound19.png",
-					"text": "Une chasse au trésor était en cours"
-				},
-				"item": {
-					"name": "sound19",
-					"file": "public/assets/items/sound/sound19.wav"
-				}
-			},
-			{
-				"selector": {
-					"name": "sound20Selector",
-					"file": "public/assets/items/sound/selectors/sound20.png",
-					"text": "Tout le monde travaillait dur"
-				},
-				"item": {
-					"name": "sound20",
-					"file": "public/assets/items/sound/sound20.wav"
-				}
-			},
-			{
-				"selector": {
-					"name": "sound21Selector",
-					"file": "public/assets/items/sound/selectors/sound21.png",
-					"text": "Une fête qui s'organisait"
-				},
-				"item": {
-					"name": "sound21",
-					"file": "public/assets/items/sound/sound21.wav"
-				}
-			},
-			{
-				"selector": {
-					"name": "sound22Selector",
-					"file": "public/assets/items/sound/selectors/sound22.png",
-					"text": "Un grand repas s'organisait"
-				},
-				"item": {
-					"name": "sound22",
-					"file": "public/assets/items/sound/sound22.wav"
-				}
-			},
-			{
-				"selector": {
-					"name": "sound23Selector",
-					"file": "public/assets/items/sound/selectors/sound23.png",
-					"text": "Une chasse au trésor était en cours"
-				},
-				"item": {
-					"name": "sound23",
-					"file": "public/assets/items/sound/sound23.wav"
-				}
-			},
-			{
-				"selector": {
-					"name": "sound24Selector",
-					"file": "public/assets/items/sound/selectors/sound24.png",
-					"text": "Tout le monde travaillait dur"
-				},
-				"item": {
-					"name": "sound24",
-					"file": "public/assets/items/sound/sound24.wav"
 				}
 			}
 		]
