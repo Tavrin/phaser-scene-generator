@@ -22,7 +22,6 @@ const PICK_BOARDS = [
     constructor(handle = 'GameScreenQrMode')
     {
         super(handle)
-        console.log("test");
         this.isScanning = false;
         this.xKey = null;
         this.isGenerating = false;
@@ -30,7 +29,8 @@ const PICK_BOARDS = [
         this.types = [];
         this.itemsNamesList = {};
         this.qrCodeIds = [];
-        this.textureId = 0;
+        this.textureIds = [];
+        this.textureIndex = 0;
 
         this.pickingBoards = [];
         this.selectedItems = {};
@@ -132,12 +132,10 @@ const PICK_BOARDS = [
             })
                 .then((stream) => {
                     video.loadMediaStream(stream, 'canplay');
-                    console.log(video.height);
                     video.scale = 0.5;
                     video.play();
 
                     this.input.keyboard.on('keydown-K', (event) => {
-                        console.log(this.isScanning);
                         if (true === this.isScanning) {
                             return
                         }
@@ -149,10 +147,6 @@ const PICK_BOARDS = [
                         }
 
                         this.qrCodeIds = [];
-                        this.images = [];
-                        let cropX = 0;
-                        let cropY = 0;
-
                         this.testScanCode(video);
                     });
                 })
@@ -163,18 +157,20 @@ const PICK_BOARDS = [
     }
 
     testScanCode(video, i = 0, cropX = 0, cropY = 0) {
+        let textureId = 'snapshot' + this.textureIndex;
+        this.textureIds.push(textureId);
+
         if (i === TOTAL_BOARD_ITEMS) {
             this.isScanning = false;
-            console.log(this.isScanning);
             this.addQrCodeIds()
             return;
         }
 
         let snapshot = video.snapshotArea(cropX, cropY, 120, 120);
 
-        this.load.textureManager.addCanvas('snapshot'+this.textureId, snapshot.canvas);
+        this.load.textureManager.addCanvas(textureId, snapshot.canvas);
 
-        this.selectors[i].addQrImage('snapshot'+this.textureId);
+        this.selectors[i].addQrImage(textureId);
         let image = this.load.textureManager.get(this.selectors[i].texture.key);
 
         cropX += 130;
@@ -184,7 +180,7 @@ const PICK_BOARDS = [
             cropY += 130;
         }
 
-        this.textureId ++;
+        this.textureIndex ++;
 
         QrScanner.scanImage(this.selectors[i].texture.getCanvas(), {
             returnDetailedScanResult : true,
@@ -264,6 +260,10 @@ const PICK_BOARDS = [
         }
 
         this.isGenerating = true;
+        for (let i in this.textureIds) {
+            this.load.textureManager.remove(this.textureIds[i]);
+        }
+
         for (let i in this.selectors) {
             if (null === this.selectors[i].itemId) {
                 continue;
@@ -281,7 +281,6 @@ const PICK_BOARDS = [
                 this.scene.remove('RenderScreen' + utils.getPreviousRenderSceneIndex());
             }
 
-            console.log(utils.getPreviousRenderSceneIndex());
             utils.incrementPreviousRenderSceneIndex();
             let key = 'RenderScreen' + utils.getPreviousRenderSceneIndex();
             let spawned = new RenderScreen(key);
