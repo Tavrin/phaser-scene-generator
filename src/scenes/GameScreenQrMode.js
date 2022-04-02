@@ -24,6 +24,7 @@ const PICK_BOARDS = [
         super(handle)
         this.isScanning = false;
         this.xKey = null;
+        this.soundKeys = {};
         this.isGenerating = false;
         this.selectors = [];
         this.types = [];
@@ -75,6 +76,18 @@ const PICK_BOARDS = [
         this.load.image(PICK_BOARDS[2], 'public/assets/img/pickboard-front.png');
         this.load.image(PICK_BOARDS[3], 'public/assets/img/pickboard-sound.png');
         this.load.image('back', 'public/assets/img/retour.png');
+
+        this.load.audio('cuteBleeps', 'public/assets/items/annexSounds/Cute bleeps.mp3');
+        this.load.audio('cuteBleeps2', 'public/assets/items/annexSounds/Cute bleeps2.mp3');
+        this.load.audio('horn', 'public/assets/items/annexSounds/horn.mp3');
+        this.load.audio('humans_horray', 'public/assets/items/annexSounds/Humans_Hooray_1.mp3');
+        this.load.audio('rock', 'public/assets/items/annexSounds/mongroupederock.mp3');
+        this.load.audio('mouthwoosh', 'public/assets/items/annexSounds/Mouth-woosh.mp3');
+        this.load.audio('readout', 'public/assets/items/annexSounds/Readout_34.mp3');
+        this.load.audio('snare', 'public/assets/items/annexSounds/SNARE.mp3');
+        this.load.audio('twinkle', 'public/assets/items/annexSounds/Twinkle.mp3');
+        this.load.audio('voyelle', 'public/assets/items/annexSounds/voyelle.mp3');
+
         //this.load.audio('audioDebut', 'public/assets/items/sound/sound1.wav');
 
         this.loadItems();
@@ -97,6 +110,73 @@ const PICK_BOARDS = [
         this.add.sprite(screenCenterX / 2.2, 160, 'labelBackground');
         this.xKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
         this.eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+
+        this.soundKeys['eightKey'] = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT),
+            'sound' : 'cuteBleeps'
+        };
+
+        this.soundKeys.soundKeyssKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
+            'sound' : 'cuteBleeps2'
+        };
+        this.soundKeys.twoKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO),
+            'sound' : 'horn',
+        };
+
+        this.soundKeys.zKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z),
+            'sound' : 'humans_horray',
+        }
+
+        this.soundKeys.iKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I),
+            'sound' : 'rock',
+        }
+
+        this.soundKeys.semiKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SEMICOLON),
+            'sound' : 'mouthwoosh',
+        }
+
+        this.soundKeys.eightKeyBis = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT),
+            'sound' : 'readout',
+        }
+
+        this.soundKeys.zeroKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO),
+            'sound' : 'snare',
+        }
+
+        this.soundKeys.oKey = {
+            'input':  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O),
+            'sound': 'twinkle'
+        }
+
+        this.soundKeys.bKey = {
+            'input': this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B),
+            'sound': 'voyelle'
+        }
+
+        for (let i in this.soundKeys) {
+            let audio = this.sound.add(this.soundKeys[i]['sound']);
+
+            this.soundKeys[i]['audio'] = audio;
+            audio.loop = true;
+
+            this.soundKeys[i]['input'].on('down', () => {
+                if (true === audio.isPlaying) {
+                    console.log('stop');
+                    audio.pause();
+
+                    return;
+                }
+
+                audio.play();
+            })
+        }
 
         this.setGenerateButton(screenCenterX);
         this.setBoard(screenCenterX);
@@ -274,6 +354,7 @@ const PICK_BOARDS = [
             }
         }
 
+        this.sound.removeAll();
         this.cameras.main.fadeOut(200, 0, 0, 0);
         this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
             this.scene.stop();
