@@ -11,6 +11,7 @@ export default class RenderScreen extends Phaser.Scene
         super(handle);
         this.previousIndex = 0;
         this.isResetting = false;
+        this.soundKeys = {};
         this.selectedItemsSelectors = null;
         this.currentSound = null;
         this.selectedItems = [];
@@ -86,6 +87,7 @@ export default class RenderScreen extends Phaser.Scene
 
     create()
     {
+
         this.bottom = this.cameras.main.worldView.bottom;
         this.screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
@@ -111,6 +113,73 @@ export default class RenderScreen extends Phaser.Scene
 
     setAudio(index = 0)
     {
+        this.soundKeys['eightKey'] = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT),
+            'sound' : 'cuteBleeps'
+        };
+
+        this.soundKeys.soundKeyssKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
+            'sound' : 'cuteBleeps2'
+        };
+        this.soundKeys.twoKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO),
+            'sound' : 'horn',
+        };
+
+        this.soundKeys.zKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z),
+            'sound' : 'humans_horray',
+        }
+
+        this.soundKeys.iKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I),
+            'sound' : 'rock',
+        }
+
+        this.soundKeys.semiKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SEMICOLON),
+            'sound' : 'mouthwoosh',
+        }
+
+        this.soundKeys.eightKeyBis = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT),
+            'sound' : 'readout',
+        }
+
+        this.soundKeys.zeroKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO),
+            'sound' : 'snare',
+        }
+
+        this.soundKeys.oKey = {
+            'input':  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O),
+            'sound': 'twinkle'
+        }
+
+        this.soundKeys.bKey = {
+            'input': this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B),
+            'sound': 'voyelle'
+        }
+
+        for (let i in this.soundKeys) {
+            let audio = this.sound.add(this.soundKeys[i]['sound']);
+
+            this.soundKeys[i]['audio'] = audio;
+            audio.loop = true;
+
+            this.soundKeys[i]['input'].on('down', () => {
+                if (true === audio.isPlaying) {
+                    console.log('stop');
+                    audio.pause();
+
+                    return;
+                }
+
+                audio.play();
+            })
+        }
+
         if (0 === this.selectedItems['sound'].length || index === this.selectedItems['sound'].length) {
             this.renderTexts();
             return;
