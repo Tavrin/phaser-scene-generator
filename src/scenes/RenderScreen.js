@@ -11,6 +11,7 @@ export default class RenderScreen extends Phaser.Scene
         super(handle);
         this.previousIndex = 0;
         this.isResetting = false;
+        this.soundKeys = {};
         this.selectedItemsSelectors = null;
         this.currentSound = null;
         this.selectedItems = [];
@@ -20,11 +21,9 @@ export default class RenderScreen extends Phaser.Scene
         this.screenCenterY = null;
         this.texts = [];
         this.escapeKey = null;
-        this.lKey = null;
     }
 
     init(data) {
-        console.log(this.isResetting);
         this.selectedItemsSelectors = data.selectedItems;
         this.previousScene = data.scene;
             console.log(utils.getPreviousSceneIndex());
@@ -86,14 +85,15 @@ export default class RenderScreen extends Phaser.Scene
 
     create()
     {
+
         this.bottom = this.cameras.main.worldView.bottom;
         this.screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         this.screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
         this.escapeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
-        this.lKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
         this.cameras.main.fadeIn(400, 0, 0, 0);
         this.cameras.main.setBackgroundColor("#fff");
         this.renderBackground();
+
         this.renderSprites('back', 560);
         this.renderSprites('front', 900);
 
@@ -103,7 +103,7 @@ export default class RenderScreen extends Phaser.Scene
     update(time, delta) {
         super.update(time, delta);
 
-        if ((this.escapeKey.isDown || this.lKey.isDown) && false === this.isResetting) {
+        if (this.escapeKey.isDown && false === this.isResetting) {
             this.isResetting = true;
             this.reset();
         }
@@ -111,6 +111,73 @@ export default class RenderScreen extends Phaser.Scene
 
     setAudio(index = 0)
     {
+        this.soundKeys['eightKey'] = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT),
+            'sound' : 'cuteBleeps'
+        };
+
+        this.soundKeys.soundKeyssKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
+            'sound' : 'cuteBleeps2'
+        };
+        this.soundKeys.twoKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO),
+            'sound' : 'horn',
+        };
+
+        this.soundKeys.zKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z),
+            'sound' : 'humans_horray',
+        }
+
+        this.soundKeys.iKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I),
+            'sound' : 'rock',
+        }
+
+        this.soundKeys.semiKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SEMICOLON),
+            'sound' : 'mouthwoosh',
+        }
+
+        this.soundKeys.eightKeyBis = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT),
+            'sound' : 'readout',
+        }
+
+        this.soundKeys.zeroKey = {
+            'input' : this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO),
+            'sound' : 'snare',
+        }
+
+        this.soundKeys.oKey = {
+            'input':  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O),
+            'sound': 'twinkle'
+        }
+
+        this.soundKeys.bKey = {
+            'input': this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B),
+            'sound': 'voyelle'
+        }
+
+        for (let i in this.soundKeys) {
+            let audio = this.sound.add(this.soundKeys[i]['sound']);
+
+            this.soundKeys[i]['audio'] = audio;
+            audio.loop = true;
+
+            this.soundKeys[i]['input'].on('down', () => {
+                if (true === audio.isPlaying) {
+                    console.log('stop');
+                    audio.pause();
+
+                    return;
+                }
+
+                audio.play();
+            })
+        }
+
         if (0 === this.selectedItems['sound'].length || index === this.selectedItems['sound'].length) {
             this.renderTexts();
             return;
@@ -274,6 +341,10 @@ export default class RenderScreen extends Phaser.Scene
 
     renderSprites(type, y)
     {
+        if (window.innerHeight < 1000) {
+            y -= 100;
+        }
+
         let sprites = [];
         let setPositions = this.setPositions(this.selectedItems[type].length);
 
